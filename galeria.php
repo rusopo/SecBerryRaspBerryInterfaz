@@ -47,21 +47,30 @@
 			$('.scrollspy').scrollSpy();
 			$(".button-collapse").sideNav();
 			$('select').material_select();
-			$('.modal-trigger').leanModal();	
+			//$('.modal-trigger').leanModal();	
       	});
-
-
-      	
 
       </script>
 
 	<script type="text/javascript">
+		$(document).ready(function(){
+		
+			$('.modal-trigger').leanModal({
+			  dismissible: false, // Modal can be dismissed by clicking outside of the modal
+			  opacity: .5, // Opacity of modal background			  
+			  out_duration: 200, // Transition out duration			  
+			});	
 			
+			$(".boton-descarga").click(function () {
+				var id = $(this).parent().parent().attr("id");
+				$('#'+id).closeModal();
+			});
+			
+		 });
 	</script>
-
+	
     </head>
     <body class="blue">
-
 
 		 <nav>
 		    <div class="nav-wrapper  blue lighten-1">
@@ -112,181 +121,160 @@
 		      </ul>
 		    </div>
 		</nav>
-		<style>
-			.gallery-img{
-				margin-top:10px;
-			}
-
-
-.social {
-  /* position: absolute; */
-  /* width: 100%; */
-  /* top: 50%; */
-  text-align: center;
-  /* transform: translateY(-50%); */
-  margin-top:15%;
-}
-
-.social .link {
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 2px dashed white;
-  background-clip: content-box;
-  padding: 10px;
-  transition: .5s;
-  color: #D7D0BE;
-  margin-left: 15px;
-  margin-right: 15px;
-  text-shadow:
-    0 -1px 0 rgba(0, 0, 0, 0.2),
-    0 1px 0 rgba(255, 255, 255, 0.2);
-  font-size: 70px;
-}
-
-.social .link span {
-  display: block;
-  position: absolute;
-  text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.social .link:hover {
-  padding: 20px;
-  color: white;
-  margin-left: -5px;
-  transform: translateX(10px) rotate(360deg);
-}
-
-.social .link.google-plus {
-  background-color: tomato;
-  color: white;
-}
-
-.social .link.twitter {
-  background-color: #00ACEE;
-  color: white;
-}
-
-.social .link.facebook {
-  background-color: #3B5998;
-  color: white;
-}
-
-
-		</style>
-
+	
 		<div><!--container-->
 			<div class="row">
-				<div class="col l3">
-					<div class="col l12 gallery-img">
-						<img class="materialboxed responsive-img " data-caption="Descripcion de foto con fecha y nombre"  src="images/nax1920.png">
-					</div>
-					<div class="col s12 l12 center white-text">
-						Tipo:Titulo+fecha
-					</div>
-					<div class="col offset-m5 offset-s2 offset-l2 l4">
-						<!-- Modal Trigger -->
-						<a class="waves-effect waves-light btn modal-trigger blue lighten-1" href="#idfoto_delete"><i class="mdi-action-delete center"></i></a>
-						<!-- Modal Structure -->
-						  <div id="idfoto_delete" class="modal blue">
-						    <div class="modal-content white-text">
-						      <h4>¿Seguro que deseas Borrar?</h4>
-						      <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
-						    </div>
-						    <div class="modal-footer blue" style="text-align:center">
-						      <a href="#" class=" white-text modal-action waves-effect waves-light btn-flat blue lighten-2 z-depth-4" >Si</a>
-						      <a href="#!" class=" white-text modal-action modal-close waves-effect waves-light btn-flat blue lighten-2 z-depth-4" style="margin-right:10px">no</a>
-						    </div>
-						  </div>
-					</div>
-					<div class="col l6">
-						<!-- Modal Trigger -->
-						<a class="waves-effect waves-light btn modal-trigger blue lighten-1" href="#idfoto_share"><i class="mdi-social-share center"></i></a>
-						<!-- Modal Structure -->
-						  <div id="idfoto_share" class="modal modal-fixed-footer blue">
-						    <div class="modal-content">
-						    	<h4 class="white-text" style="text-align:center">Compartir</h4>
-					    		<div class="social hidden-xs">
-								  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-								  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-								  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
-								</div>
-						    </div>
-						    <div class="modal-footer blue">
-						      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text blue lighten-2 z-depth-4">Cerrar</a>
-						    </div>
-						  </div>
-					</div>
-				</div>
-
-				<div class="col l3">
-					<div class="col l12 gallery-img">
-						<img class="materialboxed responsive-img" data-caption="Descripcion de foto con fecha y nombre"  src="images/nax1280.png">
-					</div>
-					<div class="col l12 center white-text">
-						Tipo:Titulo+fecha
-					</div>
-					<div class="col offset-l2 l4">
-						<a class="waves-effect waves-light btn"><i class="mdi-action-delete center"></i></a>
-					</div>
-					<div class="col l6">
-						<a class="waves-effect waves-light btn"><i class="mdi-social-share center"></i></a>
-					</div>
-				</div>
-				<div class="col l3">
-					<div class="col l12 gallery-img">
-						<img class="materialboxed responsive-img" data-caption="Descripcion de foto con fecha y nombre"  src="images/nax1067.png">
-					</div>
-					<div class="col l12 center white-text">
-						Tipo:Titulo+fecha
-					</div>
-					<div class="col offset-l2 l4">
-						<a class="waves-effect waves-light btn"><i class="mdi-action-delete center"></i></a>
-					</div>
-					<div class="col l6">
-						<a class="waves-effect waves-light btn"><i class="mdi-social-share center"></i></a>
-					</div>
-				</div>
-				<div class="col l3">
-					<div class="col l12 gallery-img">
-						<img class="materialboxed responsive-img" data-caption="Descripcion de foto con fecha y nombre"  src="images/nax711.png">
-					</div>
-					<div class="col l12 center white-text">
-						Tipo:Titulo+fecha
-					</div>
-					<div class="col offset-l2 l4">
-						<a class="waves-effect waves-light btn"><i class="mdi-action-delete center"></i></a>
-					</div>
-					<div class="col l6">
-						<a class="waves-effect waves-light btn"><i class="mdi-social-share center"></i></a>
-					</div>
-				</div>
-				<div class="col l3">
-					<div class="col l12 gallery-img">
-						<video class="responsive-video" controls>
-						    <source src="images/nax1920vid.mp4" type="video/mp4">
-						</video>
-					</div>
-					<div class="col l12 center white-text">
-						Tipo:Titulo+fecha
-					</div>
-					<div class="col offset-l2 l4">
-						<a class="waves-effect waves-light btn"><i class="mdi-action-delete center"></i></a>
-					</div>
-					<div class="col l6">
-						<a class="waves-effect waves-light btn"><i class="mdi-social-share center"></i></a>
-					</div>
-				</div>
 			
-			</div>	
-
-
+			<?php
+				$files = scandir("media");
+				if(count($files) == 2) echo "<p>No tienes imágenes ni videos guardados</p>";
+				else {
+					$contModal=0;
+					foreach($files as $file) {
+						if(($file != '.') && ($file != '..')) {
+							$fsz = round ((filesize("media/" . $file)) / (1024 * 1024));
+									  
+				if(substr($file, -3) == "jpg"){				
+			?>
+				<div class="col l3">				
+					  <div class="card">
+						<div class="card-image">
+						  <img class="materialboxed" src="media/<?php echo $file?>" data-caption="<?php echo $file?>">
+						  
+						</div>
+						<div class="card-content">
+						  <p><?php echo $file?></p>
+						</div>
+						<div class="card-action">
+							<div class="col l4">
+								<!-- Modal Trigger -->
+								<a class="waves-effect waves-light btn modal-trigger" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
+								<!-- Modal Structure -->
+								  <div id="modalDescargar<?php echo $contModal?>" class="modal blue">
+									<div class="modal-content white-text">
+									  <h4>¿Deseas descargarte este archivo?</h4>
+									  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
+									</div>
+									<div class="modal-footer blue right" style="text-align:center">
+									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
+									  <a href ="controlador/descargaArchivo.php?file=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+									</div>
+								  </div>						
+							</div>					
+							<div class="col l4">
+								<!-- Modal Trigger -->
+								<a class="waves-effect waves-light btn modal-trigger red lighten-1" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
+								<!-- Modal Structure -->
+								  <div id="modalBorrar<?php echo $contModal?>" class="modal blue">
+									<div class="modal-content white-text">
+									  <h4>¿Seguro que deseas Borrar?</h4>
+									  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
+									</div>
+									<div class="modal-footer blue" style="text-align:center">									
+									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
+									  <a href="controlador/borrarArchivo.php?delete=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+									</div>
+								  </div>
+							</div>
+							<div class="col l4">
+								<!-- Modal Trigger -->
+								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
+								<!-- Modal Structure -->
+								  <div id="modalCompartir<?php echo $contModal?>" class="modal modal-fixed-footer blue ">
+									<div class="modal-content">
+										<h4 class="white-text" style="text-align:center">Compartir</h4>
+										<div class="social hidden-xs">
+										  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+										  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+										  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+										</div>
+									</div>
+									<div class="modal-footer blue">
+									  <a href="galeria.php" class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>Cerrar</a>
+									</div>
+								  </div>
+							</div>
+						</div>
+					  </div>									
+				</div>
+				
+				<?php
+				
+				}
+				else if(substr($file, -3) == "mp4"){ ?>
+				
+					<div class="col l3">				
+					  <div class="card">
+						<div class="card-image">
+						  <video class="responsive-video" controls>
+								<source src="media/<?php echo $file ?>" type="video/mp4">
+							</video>						  
+						</div>
+						<div class="card-content">
+						  <p><?php echo $file?></p>
+						</div>
+						<div class="card-action">
+							<div class="col l4">
+								<!-- Modal Trigger -->
+								<a class="waves-effect waves-light btn modal-trigger" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
+								<!-- Modal Structure -->
+								  <div id="modalDescargar<?php echo $contModal?>" class="modal blue">
+									<div class="modal-content white-text">
+									  <h4>¿Deseas descargarte este archivo?</h4>
+									  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
+									</div>
+									<div class="modal-footer blue right" style="text-align:center">
+									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
+									  <a href ="controlador/descargaArchivo.php?file=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+									</div>
+								  </div>						
+							</div>					
+							<div class="col l4">
+								<!-- Modal Trigger -->
+								<a class="waves-effect waves-light btn modal-trigger red lighten-1" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
+								<!-- Modal Structure -->
+								  <div id="modalBorrar<?php echo $contModal?>" class="modal blue">
+									<div class="modal-content white-text">
+									  <h4>¿Seguro que deseas Borrar?</h4>
+									  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
+									</div>
+									<div class="modal-footer blue" style="text-align:center">									
+									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
+									  <a href="controlador/borrarArchivo.php?delete=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+									</div>
+								  </div>
+							</div>
+							<div class="col l4">
+								<!-- Modal Trigger -->
+								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
+								<!-- Modal Structure -->
+								  <div id="modalCompartir<?php echo $contModal?>" class="modal modal-fixed-footer blue ">
+									<div class="modal-content">
+										<h4 class="white-text" style="text-align:center">Compartir</h4>
+										<div class="social hidden-xs">
+										  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+										  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+										  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+										</div>
+									</div>
+									<div class="modal-footer blue">
+									  <a href="galeria.php" class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>Cerrar</a>
+									</div>
+								  </div>
+							</div>
+						</div>
+					  </div>									
+				</div>
+												
+			<?php	
+				}
+				$contModal++;
+						}
+					}		
+				}
+			  ?>
+			
+			</div><!--row -->
 
   		</div><!--container-->
     </body>
