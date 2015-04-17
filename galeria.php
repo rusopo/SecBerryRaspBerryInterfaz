@@ -136,49 +136,47 @@
 									  
 				if(substr($file, -3) == "jpg"){				
 			?>
-				<div class="col l3">				
-					  <div class="card">
-						<div class="card-image">
-						  <img class="materialboxed" src="media/<?php echo $file?>" data-caption="<?php echo $file?>">
-						  
+					<div class="col l3 m12 s12 item-general">					
+						<div class="col l12 m12 s12 gallery-img item-galeria-foto">
+							<img class="materialboxed responsive-img " data-caption="<?php echo $file?>"  src="media/<?php echo $file?>">
 						</div>
-						<div class="card-content">
-						  <p><?php echo $file?></p>
+						<div class="col m12 s12 l12 center item-galeria-texto">
+							<?php echo $file?>
 						</div>
-						<div class="card-action">
-							<div class="col l4">
+						<div class="col m12 s12 l12 item-galeria-botones">
+							<div class="col s4 m4 l4">
 								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
+								<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
 								<!-- Modal Structure -->
 								  <div id="modalDescargar<?php echo $contModal?>" class="modal blue">
 									<div class="modal-content white-text">
 									  <h4>¿Deseas descargarte este archivo?</h4>
 									  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 									</div>
-									<div class="modal-footer blue right" style="text-align:center">
-									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
-									  <a href ="controlador/descargaArchivo.php?file=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+									<div class="col l12 m12 s12 blue" style="text-align:right">									
+										  <a href ="controlador/descargaArchivo.php?file=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+										  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 									</div>
 								  </div>						
 							</div>					
-							<div class="col l4">
+							<div class="col s4 m4 l4">
 								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger red lighten-1" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
+								<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
 								<!-- Modal Structure -->
 								  <div id="modalBorrar<?php echo $contModal?>" class="modal blue">
 									<div class="modal-content white-text">
 									  <h4>¿Seguro que deseas Borrar?</h4>
 									  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 									</div>
-									<div class="modal-footer blue" style="text-align:center">									
-									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
+									<div class="col l12 m12 s12 blue" style="text-align:right">									
 									  <a href="controlador/borrarArchivo.php?delete=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>									
 									</div>
 								  </div>
 							</div>
-							<div class="col l4">
+							<div class="col s4 m4 l4">
 								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
+								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
 								<!-- Modal Structure -->
 								  <div id="modalCompartir<?php echo $contModal?>" class="modal modal-fixed-footer blue ">
 									<div class="modal-content">
@@ -195,58 +193,56 @@
 								  </div>
 							</div>
 						</div>
-					  </div>									
-				</div>
+					</div>
 				
 				<?php
 				
 				}
 				else if(substr($file, -3) == "mp4"){ ?>
 				
-					<div class="col l3">				
-					  <div class="card">
-						<div class="card-image">
-						  <video class="responsive-video" controls>
+					<div class="col l3 m12 s12 item-general">
+						<div class="col l12 m12 s12 gallery-img item-video">
+							<video width="100%" controls>
 								<source src="media/<?php echo $file ?>" type="video/mp4">
-							</video>						  
+							</video>
 						</div>
-						<div class="card-content">
-						  <p><?php echo $file?></p>
+						<div class="col l12 m12 s12 center item-galeria-texto-video">
+							<?php echo $file?>
 						</div>
-						<div class="card-action">
-							<div class="col l4">
+						<div class="col l12 s12 m12 item-galeria-botones">
+							<div class="col s4 m4 l4">
 								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
+								<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
 								<!-- Modal Structure -->
 								  <div id="modalDescargar<?php echo $contModal?>" class="modal blue">
 									<div class="modal-content white-text">
 									  <h4>¿Deseas descargarte este archivo?</h4>
 									  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 									</div>
-									<div class="modal-footer blue right" style="text-align:center">
-									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
+									<div class="col l12 m12 s12 blue right" style="text-align:right">
 									  <a href ="controlador/descargaArchivo.php?file=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>									
 									</div>
 								  </div>						
 							</div>					
-							<div class="col l4">
+							<div class="col s4 m4 l4">
 								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger red lighten-1" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
+								<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
 								<!-- Modal Structure -->
 								  <div id="modalBorrar<?php echo $contModal?>" class="modal blue">
 									<div class="modal-content white-text">
 									  <h4>¿Seguro que deseas Borrar?</h4>
 									  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 									</div>
-									<div class="modal-footer blue" style="text-align:center">									
-									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>
+									<div class="col l12 m12 s12 blue" style="text-align:right">									
 									  <a href="controlador/borrarArchivo.php?delete=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>									
 									</div>
 								  </div>
 							</div>
-							<div class="col l4">
+							<div class="col s4 m4 l4">
 								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
+								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
 								<!-- Modal Structure -->
 								  <div id="modalCompartir<?php echo $contModal?>" class="modal modal-fixed-footer blue ">
 									<div class="modal-content">
@@ -263,9 +259,7 @@
 								  </div>
 							</div>
 						</div>
-					  </div>									
-				</div>
-												
+					</div>				
 			<?php	
 				}
 				$contModal++;
