@@ -154,7 +154,8 @@
 							<p>Nombre: <?php echo $fila['nombre']?></p>
 							<p>ID: <?php echo $fila['clave_producto']?></p>
 			        </div>
-			    </div>
+			    </div>ç
+
 		        </li>
 		        <li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
 				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galeria</a></li>
@@ -166,6 +167,13 @@
 		      </ul>
 		    </div>
 		  </nav>
+<?php
+$query_opciones="SELECT * FROM opciones WHERE id_usuario=2";
+$resultado_opciones=$mysqli->query($query_opciones);
+$fila_opciones = $resultado_opciones->fetch_assoc();
+
+
+?>
 
 		  <div><!--container-->
 			<div class="row" id="no-resp">
@@ -174,19 +182,19 @@
 						<div class="col m12 l8 offset-l2 white-text " style="text-align:center">
 							<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;;padding-top:8px"><i class="mdi-maps-my-location "></i>Orientación</h5>
-								<p style="margin-top:0px;padding-bottom:8px">20º 40ª</p>
+								<p style="margin-top:0px;padding-bottom:8px"><?php echo $fila_opciones['rotation'];?></p>
 							</div>
 	 						<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;;padding-top:8px"><i class="mdi-image-camera-alt "></i>Fotos</h5>
-								<p style="margin-top:0px;padding-bottom:8px">1920x1080</p>
+								<p style="margin-top:0px;padding-bottom:8px"><?php echo $fila_opciones['image_width'].'x'.$fila_opciones['image_height'];?></p>
 							</div>
 	 						<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;;padding-top:8px"><i class="mdi-av-videocam"></i>Vídeos</h5>
-								<p style="margin-top:0px;padding-bottom:8px">1920x1080</p>
+								<p style="margin-top:0px;padding-bottom:8px"><?php echo $fila_opciones['video_width'].'x'.$fila_opciones['video_height'];?></p>
 							</div>
 	 						<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;;padding-top:8px"><i class="mdi-communication-phone"></i>Teléfono</h5>
-								<p style="margin-top:0px;padding-bottom:8px">659085824</p>
+								<p style="margin-top:0px;padding-bottom:8px"><?php echo $fila['telefono']?></p>
 							</div>
 						</div>
 					</div>
@@ -199,19 +207,19 @@
 						<div class="col m12 l8 offset-l2 white-text " style="text-align:center">
 							<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;padding-top:8px"><i class="mdi-device-signal-cellular-0-bar"></i>Estado Señal</h5>
-								<p style="margin-top:0px;padding-bottom:8px">20º 40ª</p>
+								<p style="margin-top:0px;padding-bottom:8px">100%</p>
 							</div>
 	 						<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;padding-top:8px"><i class="mdi-device-access-alarms "></i>Estado Alarma</h5>
-								<p style="margin-top:0px;padding-bottom:8px">1920x1080</p>
+								<p style="margin-top:0px;padding-bottom:8px"><?php echo $fila_opciones['motion_detection'];?></p>
 							</div>
 	 						<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;padding-top:8px"><i class="mdi-device-sd-storage"></i>Estado Local</h5>
-								<p style="margin-top:0px;padding-bottom:8px">1920x1080</p>
+								<p style="margin-top:0px;padding-bottom:8px"><?php echo $fila_opciones['motion_detection'];?></p>
 							</div>
 	 						<div class="blue lighten-1 z-depth-2 " style="background:red">
 								<h5 style="margin-bottom:0px;padding-top:8px"><i class="mdi-file-cloud-upload"></i>Espacio externo</h5>
-								<p style="margin-top:0px;padding-bottom:8px">659085824</p>
+								<p style="margin-top:0px;padding-bottom:8px"><?php  disk_free_space("C:");?></p>
 							</div>
 						</div>
 					</div>
