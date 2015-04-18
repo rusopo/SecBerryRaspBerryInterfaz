@@ -2,6 +2,13 @@
 	session_start(); 
 	include("conexion.php");
 
+
+function nombremes($mes){
+ setlocale(LC_TIME, 'spanish');  
+ $nombre=strftime("%B",mktime(0, 0, 0, $mes, 1, 2000)); 
+ return $nombre;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -112,109 +119,54 @@
 		    </div>
 		  </nav>
 
+<?php
+	error_reporting(E_ALL);
+
+	$id_user=4;
+
+	$query_fecha_numCada="SELECT DATE_FORMAT(fecha, '%Y-%m-%d')AS fecha_col,COUNT(*) num_reg   FROM historial WHERE id_usuario=4 GROUP BY DATE_FORMAT(fecha, '%Y-%m-%d') DESC";
+	//$query_cada_dia="SELECT * FROM historial WHERE id_usuario='$id_user' AND  DATE_FORMAT(fecha, '%Y-%m-%d')= '$num_reg_dia' ORDER BY fecha ASC";
+	$resultado=$mysqli->query($query_fecha_numCada); 
+	/*$cont_fila = mysql_fetch_array($resultado);*/
+	$numero_fechas = $resultado->num_rows;
+	echo '$numero_fechas'.$numero_fechas.'<br>';
+?>
+
+
 		<div><!--container-->
 			<div class="row">
 				<div class="col s12 l6 offset-l3 z-depth-2 " >
 					<ul class="collection blue ">
-					    <li class="collection-header  white-text" style="text-align:center"  style="text-align:center"><h4>Domingo 4 de abril de 2015</h4></li>
+<?php
+	
+while($cont_fila = $resultado->fetch_assoc()) {
+	//echo '<h1>fecha_col '.$cont_fila['fecha_col'].'  ';
+	//echo ' num_reg '.$cont_fila['num_reg'].'</h1><br>';
+	$num_reg_dia=$cont_fila['fecha_col'];
+
+?>
+					    <li class="collection-header  white-text" style="text-align:center"  style="text-align:center"><h4>
+					    <?php echo date("d",strtotime($cont_fila['fecha_col'])).' de '.nombremes(date("m",strtotime($cont_fila['fecha_col']))).' de '
+					    .date("y",strtotime($cont_fila['fecha_col']));?>
+					    </h4></li>
+<?php
+	$resultado2=$mysqli->query("SELECT * FROM historial NATURAL JOIN comando_historial WHERE id_usuario='$id_user' AND  DATE_FORMAT(fecha, '%Y-%m-%d')= '$num_reg_dia' ORDER BY fecha DESC");
+	while($cont_cada_dia =$resultado2->fetch_assoc()) { 
+?>
 					    <li class="collection-item avatar">
 		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Conexión</span>
-					      <p>19:22 <br>
-					      11/03/15
+					      <span class="title"><?php echo $cont_cada_dia['comando'].' '; ?></span>
+					      <p><?php echo date("H:m:s",strtotime($cont_cada_dia['fecha'])).'<br>'.date("d/m/Y",strtotime($cont_cada_dia['fecha'])); ; ?>
 					      </p>
 					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
 					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-av-play-arrow circle red"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-header white-text" style="text-align:center" ><h4>First Names</h4></li>
-					    <li class="collection-item avatar">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-av-play-arrow circle red"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-header white-text" style="text-align:center" ><h4>First Names</h4></li>
-					    <li class="collection-item avatar">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-av-play-arrow circle red"></i>
-					      <span class="title">Title</span>
-					      <p>First Line <br>
-					         Second Line
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
+<?php
+			
+		} 
+   }
+
+?>
+				    
 					 </ul>
 				</div>
 			</div>
