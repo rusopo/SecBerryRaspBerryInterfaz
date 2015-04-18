@@ -409,3 +409,13 @@ width:90%;
 .item-general{
 	margin-top:1% !important;
 }
+
+.li-ajustes-item{
+
+	cursor:pointer;
+}
+
+.li-ajustes-item:hover{
+
+	background-color: #EFECEC;
+}

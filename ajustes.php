@@ -48,14 +48,25 @@
 			$('select').material_select();
 			$('.modal-trigger').leanModal();	
       	});
-
-
-      	
-
+		
       </script>
 
 	<script type="text/javascript">
+			$(document).ready(function(){
+				
+				$("#selectResolucionFoto").change(function(){				
+					var resolucionFoto = $(this).val();
+					$.post( "controlador/cambiarResolucionFoto.php", { resolucionFoto: resolucionFoto} );
+								
+				});
+				
+				$("#selectResolucionVideo").change(function(){				
+					var resolucionVideo = $(this).val();
+					$.post( "controlador/cambiarResolucionVideo.php", { resolucionVideo: resolucionVideo} );
+								
+				});
 			
+			});
 	</script>
 
     </head>
@@ -81,11 +92,11 @@
 			  
 			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
 				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galeria</a></li>	
-		        <li><a href="registro.php"><i class="mdi-action-alarm"></i> Registro</a></li>
+		        <li><a href="historial.php"><i class="mdi-action-alarm"></i> Historial</a></li>
 		        <li><a href="estado.php"><i class="mdi-action-assignment"></i> Estado</a></li>
 		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
 		        <li><a href="#"><i class="mdi-action-help"></i> Ayuda</a></li>
-		        <li><a href="logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
+		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
 		      </ul>
 		      <ul class="side-nav" id="mobile-demo" >
 		        <li id="Perfil" style="display:inline-block">
@@ -104,11 +115,11 @@
 		        </li>
 		        <li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
 				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galeria</a></li>
-		        <li id="Registro"><i class="mdi-action-alarm"></i><a href="registro.php">Registro</a></li>
+		        <li id="Registro"><i class="mdi-action-alarm"></i><a href="historial.php">Historial</a></li>
 		        <li id="Estado"><i class="mdi-action-assignment"></i><a href="estado.php">Estado</a></li>
 		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
 		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="@">Ayuda</a></li>
-		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="logout.php">Salir</a></li>
+		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
 		      </ul>
 		    </div>
 		  </nav>
@@ -116,158 +127,144 @@
 		<div><!--container-->
 			<div class="row">
 				<div class="col s12 l6 offset-l3 z-depth-2 " >
-					<ul class="collection blue " style="text-align:center">
-					    <li class="collection-header  white-text"><h4>General</h4></li>
+				
+					<ul class="collection blue" style="text-align:center">
+					    <li class="collection-header white-text"><h4>Información Usuario</h4></li>
 					    <li class="collection-item avatar">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Nombre Usuario</span>
-					      <p>Roberto Morgado Luengo<br>
-					      ID:123453455345</p>
+		   			      <i class="mdi-action-account-circle circle green"></i>
+					      <span class="title" style="font-weight:bold">Nombre Usuario</span>
+					      <p><?php echo $fila['nombre']." ".$fila['apellidos']?><br>
+					      ID: <?php echo $fila['clave_producto']?></p>
+					    </li>
+						<li class="collection-item avatar">
+					      <i class="mdi-action-face-unlock circle green"></i>
+					      <span class="title" style="font-weight:bold">Foto Perfil</span>
+					     <img class="materialboxed" width="40" src="fotosPerfil/<?php echo $fila['foto']?>">
 					    </li>
 					    <li class="collection-item avatar">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Fecha Registro</span>
-					      <p>2015/04/23					      </p>
+					      <i class="mdi-action-query-builder circle green"></i>
+					      <span class="title" style="font-weight:bold">Fecha Registro</span>
+					      <p><?php echo $fila['fecha_registrado']?></p>
 					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Cambiar Contraseña</span>
-					      <p>*******do</p>
+					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalCambiarPassword">
+					      <i class="mdi-communication-vpn-key circle green"></i>
+					      <span class="title"><h5 style="font-weight:bold">Cambiar contraseña</h5></span><br/>
+							<!-- Modal Structure -->
+							  <div id="modalCambiarPassword" class="modal blue">
+								<form action="controlador/cambiarPassUsuario.php" method="POST">
+									<div class="modal-content white-text" align="center">
+									  <h4>¿Deseas cambiar de contraseña?</h4>
+										<div class="col s12 m12 l12">
+											<div class="input-field col s12 m12 l6 offset-l3">
+											  <input id="password-old" type="password" name="password-old" class="validate">
+											  <label for="password-old" style="color:#FFFFFF">Contraseña antigua</label>
+											</div>
+											<div class="input-field col s12 m12 l6 offset-l3">
+											  <input id="password-new" type="password" name="password-new" class="validate">
+											  <label for="password-new" style="color:#FFFFFF">Contraseña nueva</label>
+											</div>
+											<div class="input-field col s12 m12 l6 offset-l3">
+											  <input id="password-new2" type="password" name="password-new2" class="validate">
+											  <label for="password-new2" style="color:#FFFFFF">Confirmar contraseña nueva</label>
+											</div>
+										</div>								  									
+									</div>
+									<div class="col l12 m12 s12 blue" style="text-align:center;margin-top:5%;">									
+										  <button class="btn waves-effect waves-light " type="submit" name="boton-cambio-contrasenia">Confirmar<i class="mdi-content-send right"></i></button>								  									  
+									</div>
+								</form>
+							  </div>
 					    </li>
+					    
+						<?php $query2 = "SELECT * FROM opciones WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
+							$resul2 = $mysqli->query($query2);
+							$reg = $resul2->fetch_assoc(); ?>
+					    
+					    <li class="collection-header white-text" style="text-align:center" ><h4>Resolución</h4></li>
 					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Foto Perfil</span>
-					     <img class="materialboxed" width="40" src="images/mor.jpg">
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Grabación con Movimiento</span>
-					      <div class="switch">
-						    <label class="blue-text">
-						      Off
-						      <input type="checkbox">
-						      <span class="lever blue"></span>
-						      On
-						    </label>
-						  </div>
-					    </li>
-					    <li class="collection-header white-text" style="text-align:center" ><h4>Foto</h4></li>
-					    <li class="collection-item avatar">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Resolución</span>
-							<select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
+		   			      <i class="mdi-image-camera-alt circle blue"></i>
+					      <span class="title" style="font-weight:bold">FOTO</span>
+							<select id="selectResolucionFoto" class="browser-default" name="selectResolucionFoto">
+								<option <?php if($reg['image_width']==1920 && $reg['image_height']==1080){echo("selected");}?> value="1920x1080">1920x1080</option>
+								<option <?php if($reg['image_width']==1280 && $reg['image_height']==720){echo("selected");}?> value="1280x720">1280x720</option>
+								<option <?php if($reg['image_width']==960 && $reg['image_height']==640){echo("selected");}?> value="960x640">960x640</option>
+								<option <?php if($reg['image_width']==800 && $reg['image_height']==480){echo("selected");}?> value="800x480">800x480</option>
+								<option <?php if($reg['image_width']==320 && $reg['image_height']==240){echo("selected");}?> value="320x240">320x240</option>
 							</select>
 					    </li>
 					    <li class="collection-item avatar">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Formato Imagen</span>
-					      <select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
+		   			      <i class="mdi-image-switch-video circle blue"></i>
+					      <span class="title" style="font-weight:bold">VÍDEO</span>
+					       <select id="selectResolucionVideo" class="browser-default" name="selectResolucionVideo">
+								<option <?php if($reg['video_width']==1920 && $reg['video_height']==1080){echo("selected");}?> value="1920x1080">1920x1080</option>
+								<option <?php if($reg['video_width']==1280 && $reg['video_height']==720){echo("selected");}?> value="1280x720">1280x720</option>
+								<option <?php if($reg['video_width']==960 && $reg['video_height']==640){echo("selected");}?> value="960x640">960x640</option>
+								<option <?php if($reg['video_width']==800 && $reg['video_height']==480){echo("selected");}?> value="800x480">800x480</option>
+								<option <?php if($reg['video_width']==320 && $reg['video_height']==240){echo("selected");}?> value="320x240">320x240</option>
 							</select>
 					    </li>
-					    <li class="collection-header white-text" style="text-align:center" ><h4>Video</h4></li>
-					    <li class="collection-item avatar">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Resolución Vídeo</span>
-					       <select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-							</select>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Formato Vídeo</span>
-					       <select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-							</select>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Grabación con Movimiento</span>
-					      <div class="switch">
-						    <label class="blue-text">
-						      Off
-						      <input type="checkbox">
-						      <span class="lever blue"></span>
-						      On
-						    </label>
-						  </div>
-					    </li>
-					    <li class="collection-header white-text" style="text-align:center" ><h4>Streaming</h4></li>
-					    <li class="collection-item avatar">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Resolución</span>
-							<select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-							</select>
-					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Sensibilidad Movimiento</span>
-					      <select class="browser-default">
-								<option value="" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-							</select>
-					    </li>
-					    <li class="collection-header white-text" style="text-align:center" ><h4>Otros</h4></li>
-					    <li class="collection-item avatar modal-trigger" href="#delete_photos">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Borrar Fotos</span>
+					    				  
+					    <li class="collection-header white-text" style="text-align:center" ><h4>Avanzados</h4></li>
+					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalborrarTodasFotos">
+		   			      <i class="mdi-action-delete circle red"></i>
+					      <span class="title"><h5 style="font-weight:bold">Borrar fotos</h5></span><br/>
 					       <!-- Modal Structure -->
-						  <div id="delete_photos" class="modal blue">
-						    <div class="modal-content white-text">
-						      <h4>¿Seguro que deseas Borrar TODAS las fotos?</h4>
+						  <div id="modalborrarTodasFotos" class="modal blue">
+						    <div class="modal-content white-text" style="text-align:left">
+						      <h4>¿Seguro que deseas borrar TODAS las fotos?</h4>
 						      <p>Una vez lo hagas no podras volver a recuperar los archivos.</p>
 						    </div>
-						    <div class="modal-footer blue" style="text-align:center">
-						      <a href="#" class=" white-text modal-action waves-effect waves-light btn-flat blue lighten-2 z-depth-4" >Si</a>
-						      <a href="#!" class=" white-text modal-action modal-close waves-effect waves-light btn-flat blue lighten-2 z-depth-4" style="margin-right:10px">no</a>
-						    </div>
+						    <div class="col l12 m12 s12 blue" style="text-align:right">									
+								  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+								  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
+							</div>
 						  </div>
 					    </li>
-					    <li class="collection-item avatar modal-trigger" href="#delete_videos">
-					      <i class="mdi-file-folder circle"></i>
-					      <span class="title">Borrar Vídeo</span>
-					       <div id="delete_videos" class="modal blue" >
-						    <div class="modal-content white-text">
-						      <h4>¿Seguro que deseas Borrar TODOS los Videos?</h4>
+					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalBorrarTodosVideos">
+					      <i class="mdi-action-delete circle red"></i>
+					      <span class="title"><h5 style="font-weight:bold">Borrar videos</h5></span><br/>
+					       <!-- Modal Structure -->
+						   <div id="modalBorrarTodosVideos" class="modal blue" >
+						    <div class="modal-content white-text" style="text-align:left">
+						      <h4>¿Seguro que deseas borrar TODOS los videos?</h4>
 						      <p>Una vez lo hagas no podras volver a recuperar los archivos.</p>
 						    </div>
-						    <div class="modal-footer blue" style="text-align:center">
-						      <a href="#" class=" white-text modal-action waves-effect waves-light btn-flat blue lighten-2 z-depth-4" >Si</a>
-						      <a href="#!" class=" white-text modal-action modal-close waves-effect waves-light btn-flat blue lighten-2 z-depth-4" style="margin-right:10px">no</a>
-						    </div>
+						    <div class="col l12 m12 s12 blue" style="text-align:right">									
+								  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+								  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
+							</div>
 						  </div>
 					    </li>
-					    <li class="collection-item avatar">
-					      <i class="mdi-action-assessment circle green"></i>
-					      <span class="title">Grabación con Movimiento</span>
-					      <div class="switch">
-						    <label class="blue-text">
-						      Off
-						      <input type="checkbox">
-						      <span class="lever blue"></span>
-						      On
-						    </label>
-						  </div>
-					    </li>
+					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalReiniciarSistema">
+		   			      <i class="mdi-action-settings-power circle red"></i>
+					      <span class="title"><h5 style="font-weight:bold">Reiniciar Sistema</h5></span><br/>
+								<!-- Modal Structure -->
+								  <div id="modalReiniciarSistema" class="modal blue">
+									<div class="modal-content white-text" style="text-align:left">
+									  <h4>¿Desea reiniciar el sistema?</h4>
+									  <p>Una vez reiniciado, intente de nuevo la conexión pasado 1 minuto</p>
+									</div>
+									<div class="col l12 m12 s12 blue" style="text-align:right">									
+										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+										  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
+									</div>
+								  </div>
+						</li>
+						<li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalApagarSistema">
+		   			      <i class="mdi-action-settings-power circle red"></i>
+					      <span class="title"><h5 style="font-weight:bold">Apagar Sistema</h5></span><br/>
+								<!-- Modal Structure -->
+								  <div id="modalApagarSistema" class="modal blue">
+									<div class="modal-content white-text" style="text-align:left">
+									  <h4>¿Desea apagar el sistema por completo?</h4>
+									  <p>Tenga en cuenta que si apaga el sistema solo puede volver a encenderse fisícamente desde el aparato</p>
+									</div>
+									<div class="col l12 m12 s12 blue" style="text-align:right">									
+										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+										  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
+									</div>
+								  </div>						  
+						</li>
 					 </ul>
 				</div>
 			</div>

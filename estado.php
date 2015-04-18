@@ -135,11 +135,11 @@
 			  
 			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
 				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galeria</a></li>	
-		        <li><a href="registro.php"><i class="mdi-action-alarm"></i> Registro</a></li>
+		        <li><a href="historial.php"><i class="mdi-action-alarm"></i> Historial</a></li>
 		        <li><a href="estado.php"><i class="mdi-action-assignment"></i> Estado</a></li>
 		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
 		        <li><a href="#"><i class="mdi-action-help"></i> Ayuda</a></li>
-		        <li><a href="logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
+		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
 		      </ul>
 		      <ul class="side-nav" id="mobile-demo" >
 		        <li id="Perfil" style="display:inline-block">
@@ -154,26 +154,24 @@
 							<p>Nombre: <?php echo $fila['nombre']?></p>
 							<p>ID: <?php echo $fila['clave_producto']?></p>
 			        </div>
-			    </div>ç
-
+			    </div>
 		        </li>
 		        <li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
 				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galeria</a></li>
-		        <li id="Registro"><i class="mdi-action-alarm"></i><a href="registro.php">Registro</a></li>
+		        <li id="Registro"><i class="mdi-action-alarm"></i><a href="historial.php">Historial</a></li>
 		        <li id="Estado"><i class="mdi-action-assignment"></i><a href="estado.php">Estado</a></li>
 		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
 		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="@">Ayuda</a></li>
-		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="logout.php">Salir</a></li>
+		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
 		      </ul>
 		    </div>
 		  </nav>
-<?php
-$query_opciones="SELECT * FROM opciones WHERE id_usuario=2";
-$resultado_opciones=$mysqli->query($query_opciones);
-$fila_opciones = $resultado_opciones->fetch_assoc();
 
-
-?>
+		  <?php
+			$query_opciones="SELECT * FROM opciones WHERE id_usuario=2";
+			$resultado_opciones=$mysqli->query($query_opciones);
+			$fila_opciones = $resultado_opciones->fetch_assoc();
+			?>
 
 		  <div><!--container-->
 			<div class="row" id="no-resp">

@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 V_BR_ANT=$1
 V_BR_NEW=$2
