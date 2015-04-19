@@ -7,7 +7,7 @@ $passOld=htmlspecialchars(trim(strip_tags($_POST['password-old'])));
 $passNew=htmlspecialchars(trim(strip_tags($_POST['password-new'])));
 $passNew2=htmlspecialchars(trim(strip_tags($_POST['password-new2'])));
 
-if(isset(boton-cambio-contrasenia)){
+if(isset($_POST['boton-cambio-contrasenia'])){
 
 	$passOldCifrada=cifrarPasswordSHA1($passOld);
 	

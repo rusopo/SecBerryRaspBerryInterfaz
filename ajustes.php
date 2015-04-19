@@ -46,7 +46,11 @@
 			$('.scrollspy').scrollSpy();
 			$(".button-collapse").sideNav();
 			$('select').material_select();
-			$('.modal-trigger').leanModal();	
+			$('.modal-trigger').leanModal();
+			$('.li-ajustes-item').leanModal({
+			  dismissible: false, // Modal can be dismissed by clicking outside of the modal
+			  opacity: .5, // Opacity of modal background		
+			});	
       	});
 		
       </script>
@@ -65,7 +69,37 @@
 					$.post( "controlador/cambiarResolucionVideo.php", { resolucionVideo: resolucionVideo} );
 								
 				});
-			
+										
+			});
+	</script>
+	
+	<script type="text/javascript">
+			$(document).ready(function(){							
+				
+				$(".boton-borrar-todas-fotos").click(function () {
+					var id = $(this).parent().parent().attr("id");
+					$('#'+id).closeModal();
+					$.get( "controlador/borrarTodasFotos.php");					
+				});	
+				
+				$(".boton-borrar-todos-videos").click(function () {
+					var id = $(this).parent().parent().attr("id");
+					$('#'+id).closeModal();
+					$.get( "controlador/borrarTodosVideos.php");					
+				});
+				
+				$(".boton-reiniciar-sistema").click(function () {
+					var id = $(this).parent().parent().attr("id");
+					$('#'+id).closeModal();
+					$.get( "controlador/reiniciarSistema.php");					
+				});
+				
+				$(".boton-apagar-sistema").click(function () {
+					var id = $(this).parent().parent().attr("id");
+					$('#'+id).closeModal();
+					$.get( "controlador/apagarSistema.php");					
+				});
+				
 			});
 	</script>
 
@@ -146,9 +180,11 @@
 					      <span class="title" style="font-weight:bold">Fecha Registro</span>
 					      <p><?php echo $fila['fecha_registrado']?></p>
 					    </li>
-					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalCambiarPassword">
+					    <li class="collection-item avatar">
 					      <i class="mdi-communication-vpn-key circle green"></i>
-					      <span class="title"><h5 style="font-weight:bold">Cambiar contraseña</h5></span><br/>
+					      <span class="title" style="font-weight:bold">Cambiar contraseña</span><br/>
+							<!-- Modal Trigger -->
+								<a class="waves-effect waves-light btn modal-trigger blue boton-galeria" href="#modalCambiarPassword"><i class="mdi-content-forward left"></i>Pulse Aquí</a>
 							<!-- Modal Structure -->
 							  <div id="modalCambiarPassword" class="modal blue">
 								<form action="controlador/cambiarPassUsuario.php" method="POST">
@@ -205,7 +241,7 @@
 					    </li>
 					    				  
 					    <li class="collection-header white-text" style="text-align:center" ><h4>Avanzados</h4></li>
-					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalborrarTodasFotos">
+					    <li class="collection-item avatar li-ajustes-item" href="#modalborrarTodasFotos">
 		   			      <i class="mdi-action-delete circle red"></i>
 					      <span class="title"><h5 style="font-weight:bold">Borrar fotos</h5></span><br/>
 					       <!-- Modal Structure -->
@@ -215,12 +251,12 @@
 						      <p>Una vez lo hagas no podras volver a recuperar los archivos.</p>
 						    </div>
 						    <div class="col l12 m12 s12 blue" style="text-align:right">									
-								  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+								  <a href ="controlador/borrarTodasFotos.php" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-borrar-todas-fotos"><i class="mdi-navigation-check left"></i>Si</a>									
 								  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 							</div>
 						  </div>
 					    </li>
-					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalBorrarTodosVideos">
+					    <li class="collection-item avatar li-ajustes-item" href="#modalBorrarTodosVideos">
 					      <i class="mdi-action-delete circle red"></i>
 					      <span class="title"><h5 style="font-weight:bold">Borrar videos</h5></span><br/>
 					       <!-- Modal Structure -->
@@ -230,12 +266,12 @@
 						      <p>Una vez lo hagas no podras volver a recuperar los archivos.</p>
 						    </div>
 						    <div class="col l12 m12 s12 blue" style="text-align:right">									
-								  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+								  <a href ="controlador/borrarTodosVideos.php" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-borrar-todos-videos"><i class="mdi-navigation-check left"></i>Si</a>									
 								  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 							</div>
 						  </div>
 					    </li>
-					    <li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalReiniciarSistema">
+					    <li class="collection-item avatar li-ajustes-item" href="#modalReiniciarSistema">
 		   			      <i class="mdi-action-settings-power circle red"></i>
 					      <span class="title"><h5 style="font-weight:bold">Reiniciar Sistema</h5></span><br/>
 								<!-- Modal Structure -->
@@ -245,22 +281,22 @@
 									  <p>Una vez reiniciado, intente de nuevo la conexión pasado 1 minuto</p>
 									</div>
 									<div class="col l12 m12 s12 blue" style="text-align:right">									
-										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-reiniciar-sistema"><i class="mdi-navigation-check left"></i>Si</a>									
 										  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 									</div>
 								  </div>
 						</li>
-						<li class="collection-item avatar modal-trigger li-ajustes-item" href="#modalApagarSistema">
+						<li class="collection-item avatar li-ajustes-item" href="#modalApagarSistema">
 		   			      <i class="mdi-action-settings-power circle red"></i>
 					      <span class="title"><h5 style="font-weight:bold">Apagar Sistema</h5></span><br/>
 								<!-- Modal Structure -->
 								  <div id="modalApagarSistema" class="modal blue">
 									<div class="modal-content white-text" style="text-align:left">
 									  <h4>¿Desea apagar el sistema por completo?</h4>
-									  <p>Tenga en cuenta que si apaga el sistema solo puede volver a encenderse fisícamente desde el aparato</p>
+									  <p>Tenga en cuenta que si apaga el sistema solo puede volver a encenderse fisícamente desde el aparato.Desconecte y vuelva a conectar el cable</p>
 									</div>
 									<div class="col l12 m12 s12 blue" style="text-align:right">									
-										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1"><i class="mdi-navigation-check left"></i>Si</a>									
+										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-apagar-sistema"><i class="mdi-navigation-check left"></i>Si</a>									
 										  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 									</div>
 								  </div>						  
