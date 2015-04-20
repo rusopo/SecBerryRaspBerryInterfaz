@@ -369,6 +369,7 @@ width:90%;
 .item-galeria-foto{
 
 	background-color:white;
+	height:226px !important;
 }
 
 .item-galeria-texto{
@@ -395,6 +396,7 @@ width:90%;
 	
 	background-color:white;
 	padding-top:10% !important;
+	height:201px !important;
 }
 
 .item-galeria-texto-video{

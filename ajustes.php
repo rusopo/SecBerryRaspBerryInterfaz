@@ -184,24 +184,24 @@
 					      <i class="mdi-communication-vpn-key circle green"></i>
 					      <span class="title" style="font-weight:bold">Cambiar contraseña</span><br/>
 							<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger blue boton-galeria" href="#modalCambiarPassword"><i class="mdi-content-forward left"></i>Pulse Aquí</a>
+								<a class="waves-effect waves-light btn modal-trigger blue" href="#modalCambiarPassword"><i class="mdi-content-forward left"></i>Pulse Aquí</a>
 							<!-- Modal Structure -->
 							  <div id="modalCambiarPassword" class="modal blue">
 								<form action="controlador/cambiarPassUsuario.php" method="POST">
 									<div class="modal-content white-text" align="center">
 									  <h4>¿Deseas cambiar de contraseña?</h4>
 										<div class="col s12 m12 l12">
-											<div class="input-field col s12 m12 l6 offset-l3">
+											<div class="input-field col s12 m12 l6 offset-l3" style="margin-bottom:5%">
 											  <input id="password-old" type="password" name="password-old" class="validate">
 											  <label for="password-old" style="color:#FFFFFF">Contraseña antigua</label>
 											</div>
-											<div class="input-field col s12 m12 l6 offset-l3">
+											<div class="input-field col s12 m12 l6 offset-l3" style="margin-bottom:5%">
 											  <input id="password-new" type="password" name="password-new" class="validate">
 											  <label for="password-new" style="color:#FFFFFF">Contraseña nueva</label>
 											</div>
-											<div class="input-field col s12 m12 l6 offset-l3">
+											<div class="input-field col s12 m12 l6 offset-l3" style="margin-bottom:5%">
 											  <input id="password-new2" type="password" name="password-new2" class="validate">
-											  <label for="password-new2" style="color:#FFFFFF">Confirmar contraseña nueva</label>
+											  <label for="password-new2" style="color:#FFFFFF">Confirmar contraseña</label>
 											</div>
 										</div>								  									
 									</div>
@@ -222,22 +222,20 @@
 					      <span class="title" style="font-weight:bold">FOTO</span>
 							<select id="selectResolucionFoto" class="browser-default" name="selectResolucionFoto">
 								<option <?php if($reg['image_width']==1920 && $reg['image_height']==1080){echo("selected");}?> value="1920x1080">1920x1080</option>
-								<option <?php if($reg['image_width']==1280 && $reg['image_height']==720){echo("selected");}?> value="1280x720">1280x720</option>
-								<option <?php if($reg['image_width']==960 && $reg['image_height']==640){echo("selected");}?> value="960x640">960x640</option>
-								<option <?php if($reg['image_width']==800 && $reg['image_height']==480){echo("selected");}?> value="800x480">800x480</option>
-								<option <?php if($reg['image_width']==320 && $reg['image_height']==240){echo("selected");}?> value="320x240">320x240</option>
-							</select>
+								<option <?php if($reg['image_width']==1280 && $reg['image_height']==720){echo("selected");}?> value="1280x0720">1280x720</option>
+								<option <?php if($reg['image_width']==960 && $reg['image_height']==640){echo("selected");}?> value="0960x0640">960x640</option>
+								<option <?php if($reg['image_width']==800 && $reg['image_height']==480){echo("selected");}?> value="0800x0480">800x480</option>
+							</select>								
 					    </li>
 					    <li class="collection-item avatar">
 		   			      <i class="mdi-image-switch-video circle blue"></i>
-					      <span class="title" style="font-weight:bold">VÍDEO</span>
-					       <select id="selectResolucionVideo" class="browser-default" name="selectResolucionVideo">
+					      <span class="title" style="font-weight:bold">STREAMING/VÍDEO</span>					    
+						   <select id="selectResolucionVideo" class="browser-default" name="selectResolucionVideo">
 								<option <?php if($reg['video_width']==1920 && $reg['video_height']==1080){echo("selected");}?> value="1920x1080">1920x1080</option>
-								<option <?php if($reg['video_width']==1280 && $reg['video_height']==720){echo("selected");}?> value="1280x720">1280x720</option>
-								<option <?php if($reg['video_width']==960 && $reg['video_height']==640){echo("selected");}?> value="960x640">960x640</option>
-								<option <?php if($reg['video_width']==800 && $reg['video_height']==480){echo("selected");}?> value="800x480">800x480</option>
-								<option <?php if($reg['video_width']==320 && $reg['video_height']==240){echo("selected");}?> value="320x240">320x240</option>
-							</select>
+								<option <?php if($reg['video_width']==1280 && $reg['video_height']==720){echo("selected");}?> value="1280x0720">1280x720</option>
+								<option <?php if($reg['video_width']==960 && $reg['video_height']==640){echo("selected");}?> value="0960x0640">960x640</option>
+								<option <?php if($reg['video_width']==800 && $reg['video_height']==480){echo("selected");}?> value="0800x0480">800x480</option>
+							</select>												 
 					    </li>
 					    				  
 					    <li class="collection-header white-text" style="text-align:center" ><h4>Avanzados</h4></li>
