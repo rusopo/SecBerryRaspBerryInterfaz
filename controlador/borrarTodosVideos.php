@@ -3,12 +3,12 @@
 session_start();
 include("../conexion.php");
 
-	$files = scandir("../media");
+	$files = scandir("../media/videos");
 	
 	foreach($files as $file){
 
 		if(substr($file, -3) == "mp4"){
-			unlink("../media/videos/$file");	
+			unlink("../media/videos/". $file);	
 		}
 	}
 

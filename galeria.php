@@ -187,7 +187,7 @@
 
 							<?php
 								$fotos = scandir("media/images/");
-								if(count($fotos) == 2) echo "<p>No tienes imágenes</p>";
+								if(count($fotos) == 2) echo "<h5 class='white-text'>No tienes imágenes</h5>";
 								else {
 									$contModalIm=0;
 									foreach($fotos as $foto) {
@@ -265,11 +265,11 @@
 							
 							<?php
 								$videos = scandir("media/videos/");
-								if(count($videos) == 2) echo "<p>No tienes vídeos</p>";
+								if(count($videos) == 2) echo "<h5 class='white-text'>No tienes vídeos</h5>";
 								else {
 									$contModalVid=0;
 									foreach($videos as $video) {
-										if(($video != '.') && ($video != '..')) {
+										if(($video != '.') && ($video != '..') && (substr($video, -3) == "mp4")) {
 											$fsz = round ((filesize("media/videos/" . $video)) / (1024 * 1024));			
 								?>
 								
@@ -362,7 +362,7 @@
 					
 						<?php
 								$fotosMov = scandir("media/images/");
-								if(count($fotosMov) == 2) echo "<p>No tienes imágenes</p>";
+								if(count($fotosMov) == 2) echo "<h5 class='white-text'>No tienes imágenes</h5>";
 								else {
 									$contModalImMov=0;
 									foreach($fotosMov as $fotoMov) {
@@ -441,11 +441,11 @@
 						
 						<?php
 								$videosMov = scandir("media/videos/");
-								if(count($videosMov) == 2) echo "<p>No tienes vídeos</p>";
+								if(count($videosMov) == 2) echo "<h5 class='white-text'>No tienes vídeos</h5>";
 								else {
 									$contModalVidMov=0;
 									foreach($videosMov as $videoMov) {
-										if(($videoMov != '.') && ($videoMov != '..')) {
+										if(($videoMov != '.') && ($videoMov != '..') && (substr($videoMov, -3) == "mp4")) {
 											$fsz = round ((filesize("media/videos/" . $videoMov)) / (1024 * 1024));			
 								?>
 								
