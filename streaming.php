@@ -25,7 +25,7 @@
       <script type="text/javascript" src="js/materialize.js"></script>
       <script type="text/javascript" src="js/jquery-scrollspy.js"></script>
 	  <script type="text/javascript" src="js/smooth-scroll.js"></script>
-	
+	  
      <script>
       	$(document).ready(function(){
       		$(".dropdown-button").dropdown({hover: false});
@@ -197,14 +197,13 @@
 									<p class="text-BrConRot">Rotación</p>
 								</div>
 								<div class="col l8 offset-l1">
-									<div class="browser-default">
-										<select class="rotacion" name="rotacion">
-										  <option <?php if($registro['rotation']==0){echo("selected");}?> value="0">0</option>
-										  <option <?php if($registro['rotation']==90){echo("selected");}?> value="90">90</option>
-										  <option <?php if($registro['rotation']==180){echo("selected");}?>value="180">180</option>
-										  <option <?php if($registro['rotation']==270){echo("selected");}?> value="270">270</option>
+										<select class="browser-default rotacion" name="rotacion">
+										  <option <?php if($registro['rotation']==0){echo("selected ");}?> value="0">0</option>
+										  <option <?php if($registro['rotation']==90){echo("selected ");}?> value="90">90</option>
+										  <option <?php if($registro['rotation']==180){echo("selected ");}?>value="180">180</option>
+										  <option <?php if($registro['rotation']==270){echo("selected ");}?> value="270">270</option>
 										</select>
-								  </div>
+								 
 								</div>
 							  </div>
 							  <div class="row">
@@ -217,8 +216,12 @@
 					</div>
 				</div>
 				<div class="col m6 l6" style="margin-top:5%">
-					<img id="mjpeg_dest"/>
-					<div class="col m12 l12" style="margin-top:3%" align="center">
+					<div><img id="mjpeg_dest" class="zoom-imagen" onclick="toggle_fullscreen(this);"/></div>
+					<div class="col m12 l12" style="font-weight:bold" align="center">
+						<h5 id="texto-estado" style="color:#FFFFFF"><h5>
+					</div>
+					
+					<div class="col m12 l12" style="margin-top:1%" align="center">
 						<div class="col m16 l6" align="center">
 							<a class="boton-foto lighten-1 waves-effect waves-light btn btn-large cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
 						</div>
@@ -232,19 +235,31 @@
 				<div class="col m3 l3" style="margin-top:9%">
 					<div class="row">
 						<div class="col m12 l12" align="center">
-							<h4 style="color:white">Detección de movimiento</h4>							
-							<?php $query4 = "SELECT * FROM opciones WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
-							$resul4 = $mysqli->query($query4);
-							$register = $resul4->fetch_assoc(); ?>
 							
-							<?php if($register['motion_detection']==0){ ?>
-							<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov"><i class="mdi-navigation-check left"></i>Activado</a>
-							<a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red disabled desactivar-button boton-desactivar-mov"><i class="mdi-navigation-close left"></i>Desactivado</a>
-							<?php } 
-							else if($register['motion_detection']==1){ ?>
-							<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov disabled activar-button"><i class="mdi-navigation-check left"></i> Activado</a>
-							<a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red boton-desactivar-mov"><i class="mdi-navigation-close left"></i> Desactivado</a>
-							<?php } ?>
+							<div class="row">
+								<h4 style="color:white">Detección de movimiento</h4>
+							</div>
+								
+								<?php $query4 = "SELECT * FROM opciones WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
+								$resul4 = $mysqli->query($query4);
+								$register = $resul4->fetch_assoc(); ?>
+								
+								<?php if($register['motion_detection']==0){ ?>
+								<div class="row">
+									<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov"><i class="mdi-navigation-check left"></i>Activado</a>
+								</div>
+								<div class="row">
+									<a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red disabled desactivar-button boton-desactivar-mov"><i class="mdi-navigation-close left"></i>Desactivado</a>
+								</div>
+								<?php } 
+								else if($register['motion_detection']==1){ ?>
+								<div class="row">
+									<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov disabled activar-button"><i class="mdi-navigation-check left"></i> Activado</a>
+								</div>
+								<div class="row">
+								    <a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red boton-desactivar-mov"><i class="mdi-navigation-close left"></i> Desactivado</a>
+								</div>
+								<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -284,7 +299,7 @@
 				
 			
 				<div class="col s12 l12 m12">
-					<img id="mjpeg_dest2" width="100%"/>
+					<div><img id="mjpeg_dest2" width="100%" class="zoom-imagen" onclick="toggle_fullscreen(this);"/></div>
 					<div class="col s12 m12 l12" style="margin-top:3%" align="center">
 						<div class="col s6 m6 l6" align="center">
 							<a class="boton-foto lighten-1 waves-effect waves-light btn cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
@@ -331,14 +346,12 @@
 									<p class="text-BrConRot-mov">Rotación</p>
 								</div>
 								<div class="col s9 m9 l9">
-									<div class="browser-default">
-										<select class="rotacion" name="rotacion">
-										  <option value="0">0</option>
-										  <option value="90">90</option>
-										  <option value="180">180</option>
-										  <option value="270">270</option>
+										<select class="browser-default rotacion" name="rotacion">
+										  <option <?php if($registro['rotation']==0){echo("selected ");}?> value="0">0</option>
+										  <option <?php if($registro['rotation']==90){echo("selected ");}?> value="90">90</option>
+										  <option <?php if($registro['rotation']==180){echo("selected ");}?>value="180">180</option>
+										  <option <?php if($registro['rotation']==270){echo("selected ");}?> value="270">270</option>
 										</select>
-								  </div>
 								</div>
 							  </div>
 							  <div class="row">

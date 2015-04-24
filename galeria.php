@@ -15,6 +15,9 @@
       <meta charset="utf-8">
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	  
+	  <script src="js/script.js"></script>
+	  
        <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.js"></script>
@@ -43,30 +46,73 @@
       			
 			});
 			$('.parallax').parallax();
-			$('.materialboxed').materialbox();
+			//$('.materialboxed').materialbox();
 			$('.scrollspy').scrollSpy();
 			$(".button-collapse").sideNav();
 			$('select').material_select();
-			//$('.modal-trigger').leanModal();	
+			//$('.modal-trigger').leanModal();
+			$('ul.tabs').tabs();
       	});
 
       </script>
+	  
+	  <script type="text/javascript">
+				$(document).ready(function(){
+				
+					$('.materialboxed').materialbox();
+				
+					$('.modal-trigger').leanModal({
+					  dismissible: false, // Modal can be dismissed by clicking outside of the modal
+					  opacity: .5, // Opacity of modal background			  
+					  out_duration: 200, // Transition out duration			  
+					});	
+					
+					$(".boton-descarga").click(function () {
+						var id = $(this).parent().parent().attr("id");
+						$('#'+id).closeModal();
+					});
+					
+					$(".boton-cerrar-modal").click(function () {
+						var id = $(this).parent().parent().attr("id");
+						$('#'+id).closeModal();
+					});					
+				 });
+		</script>
+	  
+	  <script type="text/javascript">
+		$(document).ready(function() {
+			   
+		   $("#lista-galeria").on("click", "#galeria-imagenes", function(event){
+				$("#galeria-videos").removeClass("active");
+				$("#galeria-imagenes").addClass("active");
+				$("#galeria-general-videos").css("display", "none");
+				$("#galeria-general-imagenes").css("display", "block");
+		   });
 
-	<script type="text/javascript">
-		$(document).ready(function(){
+			$("#lista-galeria").on("click", "#galeria-videos", function(event){
+				$("#galeria-imagenes").removeClass("active");
+			    $("#galeria-videos").addClass("active");
+				$("#galeria-general-imagenes").css("display", "none");
+				$("#galeria-general-videos").css("display", "block");
+		   });		   
+		});
 		
-			$('.modal-trigger').leanModal({
-			  dismissible: false, // Modal can be dismissed by clicking outside of the modal
-			  opacity: .5, // Opacity of modal background			  
-			  out_duration: 200, // Transition out duration			  
-			});	
-			
-			$(".boton-descarga").click(function () {
-				var id = $(this).parent().parent().attr("id");
-				$('#'+id).closeModal();
-			});
-			
-		 });
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			   
+		   $(".tabs").on("click", ".galeria-imagenes-mov", function(event){
+			  $("#galeria-general-videos-mov").css("display", "none");
+			  $("#galeria-general-imagenes-mov").css("display", "block");
+		   });
+
+			$(".tabs").on("click", ".galeria-videos-mov", function(event){
+			  $("#galeria-general-imagenes-mov").css("display", "none");
+			  $("#galeria-general-videos-mov").css("display", "block");
+		   });
+		});
+		
 	</script>
 	
     </head>
@@ -121,155 +167,361 @@
 		      </ul>
 		    </div>
 		</nav>
-	
-		<div><!--container-->
-			<div class="row">
-			
-			<?php
-				$files = scandir("media");
-				if(count($files) == 2) echo "<p>No tienes imágenes ni videos guardados</p>";
-				else {
-					$contModal=0;
-					foreach($files as $file) {
-						if(($file != '.') && ($file != '..')) {
-							$fsz = round ((filesize("media/" . $file)) / (1024 * 1024));
-									  
-				if(substr($file, -3) == "jpg"){				
-			?>
-					<div class="col l3 m12 s12 item-general">					
-						<div class="col l12 m12 s12 gallery-img item-galeria-foto">
-							<img class="materialboxed responsive-img " data-caption="<?php echo $file?>"  src="media/<?php echo $file?>">
-						</div>
-						<div class="col m12 s12 l12 center item-galeria-texto">
-							<?php echo $file?>
-						</div>
-						<div class="col m12 s12 l12 item-galeria-botones">
-							<div class="col s4 m4 l4">
-								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
-								<!-- Modal Structure -->
-								  <div id="modalDescargar<?php echo $contModal?>" class="modal blue">
-									<div class="modal-content white-text">
-									  <h4>¿Deseas descargarte este archivo?</h4>
-									  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
-									</div>
-									<div class="col l12 m12 s12 blue" style="text-align:right">									
-										  <a href ="controlador/descargaArchivo.php?file=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
-										  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
-									</div>
-								  </div>						
-							</div>					
-							<div class="col s4 m4 l4">
-								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
-								<!-- Modal Structure -->
-								  <div id="modalBorrar<?php echo $contModal?>" class="modal blue">
-									<div class="modal-content white-text">
-									  <h4>¿Seguro que deseas Borrar?</h4>
-									  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
-									</div>
-									<div class="col l12 m12 s12 blue" style="text-align:right">									
-									  <a href="controlador/borrarArchivo.php?delete=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
-									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>									
-									</div>
-								  </div>
-							</div>
-							<div class="col s4 m4 l4">
-								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
-								<!-- Modal Structure -->
-								  <div id="modalCompartir<?php echo $contModal?>" class="modal modal-fixed-footer blue ">
-									<div class="modal-content">
-										<h4 class="white-text" style="text-align:center">Compartir</h4>
-										<div class="social hidden-xs">
-										  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-										  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-										  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
-										</div>
-									</div>
-									<div class="modal-footer blue">
-									  <a href="galeria.php" class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>Cerrar</a>
-									</div>
-								  </div>
-							</div>
-						</div>
+				
+			<div class="row divNoResponsivo" id="no-resp">
+						
+					<div class="col m3 l3 blue darken-2 izq-galeria">
+						
+						<ul id="lista-galeria" class="white-text">
+						
+							<li id="galeria-imagenes" class="item-galeria active"><h5><i class="mdi-image-photo left"></i><strong>Imágenes</strong></h5></li>							
+							<li id="galeria-videos" class="item-galeria"><h5><i class="mdi-av-movie left"></i><strong>Vídeos</strong><h5></li>
+						
+						</ul>
+					
 					</div>
-				
-				<?php
-				
-				}
-				else if(substr($file, -3) == "mp4"){ ?>
-				
-					<div class="col l3 m12 s12 item-general">
-						<div class="col l12 m12 s12 gallery-img item-video">
-							<video width="100%" controls>
-								<source src="media/<?php echo $file ?>" type="video/mp4">
-							</video>
-						</div>
-						<div class="col l12 m12 s12 center item-galeria-texto-video">
-							<?php echo $file?>
-						</div>
-						<div class="col l12 s12 m12 item-galeria-botones">
-							<div class="col s4 m4 l4">
-								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargar<?php echo $contModal?>"><i class="mdi-file-file-download center"></i></a>
-								<!-- Modal Structure -->
-								  <div id="modalDescargar<?php echo $contModal?>" class="modal blue">
-									<div class="modal-content white-text">
-									  <h4>¿Deseas descargarte este archivo?</h4>
-									  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
-									</div>
-									<div class="col l12 m12 s12 blue right" style="text-align:right">
-									  <a href ="controlador/descargaArchivo.php?file=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
-									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>									
-									</div>
-								  </div>						
-							</div>					
-							<div class="col s4 m4 l4">
-								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrar<?php echo $contModal?>"><i class="mdi-action-delete center"></i></a>
-								<!-- Modal Structure -->
-								  <div id="modalBorrar<?php echo $contModal?>" class="modal blue">
-									<div class="modal-content white-text">
-									  <h4>¿Seguro que deseas Borrar?</h4>
-									  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
-									</div>
-									<div class="col l12 m12 s12 blue" style="text-align:right">									
-									  <a href="controlador/borrarArchivo.php?delete=<?php echo $file?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
-									  <a href="galeria.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal"><i class="mdi-navigation-close left"></i>No</a>									
-									</div>
-								  </div>
-							</div>
-							<div class="col s4 m4 l4">
-								<!-- Modal Trigger -->
-								<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartir<?php echo $contModal?>"><i class="mdi-social-share center"></i></a>
-								<!-- Modal Structure -->
-								  <div id="modalCompartir<?php echo $contModal?>" class="modal modal-fixed-footer blue ">
-									<div class="modal-content">
-										<h4 class="white-text" style="text-align:center">Compartir</h4>
-										<div class="social hidden-xs">
-										  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-										  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-										  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+					
+					<div class="col m9 l9 cuerpo-galeria">
+					
+						<div id="galeria-general-imagenes">
+
+							<?php
+								$fotos = scandir("media/images/");
+								if(count($fotos) == 2) echo "<p>No tienes imágenes</p>";
+								else {
+									$contModalIm=0;
+									foreach($fotos as $foto) {
+										if(($foto != '.') && ($foto != '..')) {
+											$fsz = round ((filesize("media/images/" . $foto)) / (1024 * 1024));			
+								?>
+									<div class="col l4 m12 s12 item-general">					
+										<div class="col l12 m12 s12 gallery-img item-galeria-foto">
+											<div><img class="zoom-imagen responsive-img" onclick="toggle_fullscreen(this);" src="media/preview/<?php echo $foto?>"></div>
+										</div>
+										<div class="col m12 s12 l12 center item-galeria-texto">
+											<?php echo $foto?>
+										</div>
+										<div class="col m12 s12 l12 item-galeria-botones">
+											<div class="col s4 m4 l4">
+												<!-- Modal Trigger -->
+												<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarImagen<?php echo $contModalIm?>"><i class="mdi-file-file-download center"></i></a>
+												<!-- Modal Structure -->
+												  <div id="modalDescargarImagen<?php echo $contModalIm?>" class="modal blue">
+													<div class="modal-content white-text">
+													  <h4>¿Deseas descargarte este archivo?</h4>
+													  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
+													</div>
+													<div class="col l12 m12 s12 blue" style="text-align:right">									
+														  <a href ="controlador/descargaFoto.php?file=<?php echo $foto?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+														  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									  									  
+													</div>
+												  </div>						
+											</div>					
+											<div class="col s4 m4 l4">
+												<!-- Modal Trigger -->
+												<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarImagen<?php echo $contModalIm?>"><i class="mdi-action-delete center"></i></a>
+												<!-- Modal Structure -->
+												  <div id="modalBorrarImagen<?php echo $contModalIm?>" class="modal blue">
+													<div class="modal-content white-text">
+													  <h4>¿Seguro que deseas Borrar?</h4>
+													  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
+													</div>
+													<div class="col l12 m12 s12 blue" style="text-align:right">									
+													  <a href="controlador/borrarArchivo.php?delete=<?php echo $foto?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+													  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
+													</div>
+												  </div>
+											</div>
+											<div class="col s4 m4 l4">
+												<!-- Modal Trigger -->
+												<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartirImagen<?php echo $contModalIm?>"><i class="mdi-social-share center"></i></a>
+												<!-- Modal Structure -->
+												  <div id="modalCompartirImagen<?php echo $contModalIm?>" class="modal modal-fixed-footer blue ">
+													<div class="modal-content">
+														<h4 class="white-text" style="text-align:center">Compartir</h4>
+														<div class="social hidden-xs">
+														  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+														  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+														  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+														</div>
+													</div>
+													<div class="modal-footer blue">
+													  <a class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>Cerrar</a>
+													</div>
+												  </div>
+											</div>
 										</div>
 									</div>
-									<div class="modal-footer blue">
-									  <a href="galeria.php" class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>Cerrar</a>
-									</div>
-								  </div>
-							</div>
+								
+								<?php 
+									$contModalIm++;
+										}
+									}
+								}
+								?>					
 						</div>
-					</div>				
-			<?php	
-				}
-				$contModal++;
-						}
-					}		
-				}
-			  ?>
-			
-			</div><!--row -->
+						
+						<div id="galeria-general-videos" style="display:none">
+							
+							<?php
+								$videos = scandir("media/videos/");
+								if(count($videos) == 2) echo "<p>No tienes vídeos</p>";
+								else {
+									$contModalVid=0;
+									foreach($videos as $video) {
+										if(($video != '.') && ($video != '..')) {
+											$fsz = round ((filesize("media/videos/" . $video)) / (1024 * 1024));			
+								?>
+								
+								<div class="col l4 m12 s12 item-general">
+									<div class="col l12 m12 s12 gallery-img item-video">
+										<video width="100%" controls>
+											<source src="media/videos/<?php echo $video ?>" type="video/mp4">
+										</video>
+									</div>
+									<div class="col l12 m12 s12 center item-galeria-texto-video">
+										<?php echo $video?>
+									</div>
+									<div class="col l12 s12 m12 item-galeria-botones">
+										<div class="col s4 m4 l4">
+											<!-- Modal Trigger -->
+											<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarVideo<?php echo $contModalVid?>"><i class="mdi-file-file-download center"></i></a>
+											<!-- Modal Structure -->
+											  <div id="modalDescargarVideo<?php echo $contModalVid?>" class="modal blue">
+												<div class="modal-content white-text">
+												  <h4>¿Deseas descargarte este archivo?</h4>
+												  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
+												</div>
+												<div class="col l12 m12 s12 blue right" style="text-align:right">
+												  <a href ="controlador/descargaVideo.php?file=<?php echo $video?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
+												</div>
+											  </div>						
+										</div>					
+										<div class="col s4 m4 l4">
+											<!-- Modal Trigger -->
+											<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarVideo<?php echo $contModalVid?>"><i class="mdi-action-delete center"></i></a>
+											<!-- Modal Structure -->
+											  <div id="modalBorrarVideo<?php echo $contModalVid?>" class="modal blue">
+												<div class="modal-content white-text">
+												  <h4>¿Seguro que deseas Borrar?</h4>
+												  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
+												</div>
+												<div class="col l12 m12 s12 blue" style="text-align:right">									
+												  <a href="controlador/borrarArchivo.php?delete=<?php echo $video?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
+												</div>
+											  </div>
+										</div>
+										<div class="col s4 m4 l4">
+											<!-- Modal Trigger -->
+											<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartirVideo<?php echo $contModalVid?>"><i class="mdi-social-share center"></i></a>
+											<!-- Modal Structure -->
+											  <div id="modalCompartirVideo<?php echo $contModalVid?>" class="modal modal-fixed-footer blue ">
+												<div class="modal-content">
+													<h4 class="white-text" style="text-align:center">Compartir</h4>
+													<div class="social hidden-xs">
+													  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+													  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+													  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+													</div>
+												</div>
+												<div class="modal-footer blue">
+												  <a class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>Cerrar</a>
+												</div>
+											  </div>
+										</div>
+									</div>
+								</div>
+								
+								<?php 
+									$contModalVid++;
+										}
+									
+									}
+								}
+								?>
+						
+						</div>
+									
+					</div>
+									
+			</div>
 
-  		</div><!--container-->
+
+			<div class="row" id="resp">
+			
+				  <ul class="tabs">
+					<li class="tab col s6"><a class="galeria-imagenes-mov active"><i class="mdi-image-photo center"></i><strong>Imágenes</a></li>
+					<li class="tab col s6"><a class="galeria-videos-mov"><i class="mdi-av-movie center"></i><strong>Vídeos</a></li>
+				  </ul>
+				
+				<div class="col s12">
+				
+					<div id="galeria-general-imagenes-mov"> 
+					
+						<?php
+								$fotosMov = scandir("media/images/");
+								if(count($fotosMov) == 2) echo "<p>No tienes imágenes</p>";
+								else {
+									$contModalImMov=0;
+									foreach($fotosMov as $fotoMov) {
+										if(($fotoMov != '.') && ($fotoMov != '..')) {
+											$fsz = round ((filesize("media/images/" . $fotoMov)) / (1024 * 1024));			
+								?>
+									<div class="col l4 m12 s12 item-general">					
+										<div class="col l12 m12 s12 gallery-img item-galeria-foto">
+											<div><img class="zoom-imagen responsive-img" onclick="toggle_fullscreen(this);" src="media/preview/<?php echo $fotoMov?>"></div>
+										</div>
+										<div class="col m12 s12 l12 center item-galeria-texto">
+											<?php echo $fotoMov?>
+										</div>
+										<div class="col m12 s12 l12 item-galeria-botones">
+											<div class="col s4 m4 l4">
+												<!-- Modal Trigger -->
+												<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarImagenMov<?php echo $contModalImMov?>"><i class="mdi-file-file-download center"></i></a>
+												<!-- Modal Structure -->
+												  <div id="modalDescargarImagenMov<?php echo $contModalImMov?>" class="modal blue">
+													<div class="modal-content white-text">
+													  <h4>¿Deseas descargarte este archivo?</h4>
+													  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
+													</div>
+													<div class="col l12 m12 s12 blue" style="text-align:right">									
+														  <a href ="controlador/descargaFoto.php?file=<?php echo $fotoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+														  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									  									  
+													</div>
+												  </div>						
+											</div>					
+											<div class="col s4 m4 l4">
+												<!-- Modal Trigger -->
+												<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarImagenMov<?php echo $contModalImMov?>"><i class="mdi-action-delete center"></i></a>
+												<!-- Modal Structure -->
+												  <div id="modalBorrarImagenMov<?php echo $contModalImMov?>" class="modal blue">
+													<div class="modal-content white-text">
+													  <h4>¿Seguro que deseas Borrar?</h4>
+													  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
+													</div>
+													<div class="col l12 m12 s12 blue" style="text-align:right">									
+													  <a href="controlador/borrarArchivo.php?delete=<?php echo $fotoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+													  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
+													</div>
+												  </div>
+											</div>
+											<div class="col s4 m4 l4">
+												<!-- Modal Trigger -->
+												<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartirImagenMov<?php echo $contModalImMov?>"><i class="mdi-social-share center"></i></a>
+												<!-- Modal Structure -->
+												  <div id="modalCompartirImagenMov<?php echo $contModalImMov?>" class="modal modal-fixed-footer blue ">
+													<div class="modal-content">
+														<h4 class="white-text" style="text-align:center">Compartir</h4>
+														<div class="social hidden-xs">
+														  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+														  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+														  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+														</div>
+													</div>
+													<div class="modal-footer blue">
+													  <a class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>Cerrar</a>
+													</div>
+												  </div>
+											</div>
+										</div>
+									</div>
+								
+								<?php 
+									$contModalImMov++;
+										}
+									}
+								}
+								?>
+					
+					</div>
+					
+					<div id="galeria-general-videos-mov" style="display:none"> 
+						
+						<?php
+								$videosMov = scandir("media/videos/");
+								if(count($videosMov) == 2) echo "<p>No tienes vídeos</p>";
+								else {
+									$contModalVidMov=0;
+									foreach($videosMov as $videoMov) {
+										if(($videoMov != '.') && ($videoMov != '..')) {
+											$fsz = round ((filesize("media/videos/" . $videoMov)) / (1024 * 1024));			
+								?>
+								
+								<div class="col l4 m12 s12 item-general">
+									<div class="col l12 m12 s12 gallery-img item-video">
+										<video width="100%" controls>
+											<source src="media/videos/<?php echo $videoMov ?>" type="video/mp4">
+										</video>
+									</div>
+									<div class="col l12 m12 s12 center item-galeria-texto-video">
+										<?php echo $videoMov?>
+									</div>
+									<div class="col l12 s12 m12 item-galeria-botones">
+										<div class="col s4 m4 l4">
+											<!-- Modal Trigger -->
+											<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarVideoMov<?php echo $contModalVidMov?>"><i class="mdi-file-file-download center"></i></a>
+											<!-- Modal Structure -->
+											  <div id="modalDescargarVideoMov<?php echo $contModalVidMov?>" class="modal blue">
+												<div class="modal-content white-text">
+												  <h4>¿Deseas descargarte este archivo?</h4>
+												  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
+												</div>
+												<div class="col l12 m12 s12 blue right" style="text-align:right">
+												  <a href ="controlador/descargaVideo.php?file=<?php echo $videoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
+												</div>
+											  </div>						
+										</div>					
+										<div class="col s4 m4 l4">
+											<!-- Modal Trigger -->
+											<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarVideoMov<?php echo $contModalVidMov?>"><i class="mdi-action-delete center"></i></a>
+											<!-- Modal Structure -->
+											  <div id="modalBorrarVideoMov<?php echo $contModalVidMov?>" class="modal blue">
+												<div class="modal-content white-text">
+												  <h4>¿Seguro que deseas Borrar?</h4>
+												  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
+												</div>
+												<div class="col l12 m12 s12 blue" style="text-align:right">									
+												  <a href="controlador/borrarArchivo.php?delete=<?php echo $videoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
+												</div>
+											  </div>
+										</div>
+										<div class="col s4 m4 l4">
+											<!-- Modal Trigger -->
+											<a class="waves-effect waves-light btn modal-trigger indigo lighten-1 boton-galeria" href="#modalCompartirVideoMov<?php echo $contModalVidMov?>"><i class="mdi-social-share center"></i></a>
+											<!-- Modal Structure -->
+											  <div id="modalCompartirVideoMov<?php echo $contModalVidMov?>" class="modal modal-fixed-footer blue ">
+												<div class="modal-content">
+													<h4 class="white-text" style="text-align:center">Compartir</h4>
+													<div class="social hidden-xs">
+													  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+													  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+													  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+													</div>
+												</div>
+												<div class="modal-footer blue">
+												  <a class="modal-action modal-close waves-effect waves-green btn-flat white-text red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>Cerrar</a>
+												</div>
+											  </div>
+										</div>
+									</div>
+								</div>
+								
+								<?php 
+									$contModalVidMov++;
+										}
+									
+									}
+								}
+								?>
+					
+					</div>
+										
+				</div>
+			</div>
+					
     </body>
   </html>

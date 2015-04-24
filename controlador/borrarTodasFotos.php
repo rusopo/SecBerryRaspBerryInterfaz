@@ -8,7 +8,8 @@ include("../conexion.php");
 	foreach($files as $file){
 
 		if(substr($file, -3) == "jpg"){
-			unlink("../media/$file");	
+			unlink("../media/images/$file");
+			unlink("../media/preview/$file");	
 		}
 	}
 

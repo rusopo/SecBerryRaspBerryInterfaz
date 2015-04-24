@@ -1,32 +1,10 @@
 <?php
 	
-	/*
-	if(substr($_GET["file"], -3) == "jpg"){
-		header("Content-Type: image/jpeg");
-	}
-	else{
-		header("Content-Type: video/mp4");
-	}
-  
-	header('Content-Description: File Transfer');
-	header("Content-Disposition: attachment; filename=\"" . $_GET["file"] . "\"");
-	header('Content-Transfer-Encoding: binary');
-	header('Expires: 0');
-	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-	header('Pragma: public');
-	header('Content-Length: ' . filesize("../media/".$_GET["file"]));
-	
-	ob_clean();
-	flush();
-	readfile("../media/" . $_GET["file"]);
-	
-	//header("Location: ../galeria.php");
-	*/
 	
 	if (!isset($_GET['file']) || empty($_GET['file'])) {
 	 exit();
 	}
-		$root = "../media/";
+		$root = "../media/videos/";
 		$file = basename($_GET['file']);
 		$path = $root.$file;
 		$type = '';
