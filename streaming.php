@@ -67,7 +67,11 @@
 					$(".boton-activar-mov").addClass("desactivar-button");
 					$(".boton-desactivar-mov").removeClass("disabled");
 					$(".boton-desactivar-mov").removeClass("desactivar-button");
+					
 					$.get( "controlador/activar_mov.php", function( data ){});
+					
+					$(".texto-estado").text("Detección de movimiento activado");
+								
 				});
 				
 				$(".boton-desactivar-mov").click(function(){
@@ -75,36 +79,74 @@
 					$(".boton-desactivar-mov").addClass("desactivar-button");
 					$(".boton-activar-mov").removeClass("disabled");
 					$(".boton-activar-mov").removeClass("desactivar-button");
+										
 					$.get( "controlador/desactivar_mov.php", function( data ){});
+					
+					$(".texto-estado").text("Streaming");
 				});
 			});
 	</script>
 	
 	<script>
-		$(document).ready(function(){			
-				$(".boton-foto").click(function(){			
+		$(document).ready(function(){
+
+				if($(".boton-activar-mov").hasClass('disabled')){
+				
+					$(".texto-estado").text("Detección de movimiento activado");										
+				}
+				else{					
+					$(".texto-estado").text("Streaming");
+					}
+				
+				$(".boton-foto").click(function(){	
+				
+					$(".texto-estado").text("Capturando foto...");
+					
 					$.get( "controlador/hacerFoto.php", function( data ){});
+					
+					setTimeout(function() {
+					    //do something special 
+						if($(".boton-activar-mov").hasClass('disabled')){
+					
+						$(".texto-estado").text("Detección de movimiento activado");										
+						}
+						else{					
+							$(".texto-estado").text("Streaming");
+						}
+					  }, 2000);
+												
+					
 				});
 				
 				$(".boton-iniciar-video").click(function(){
 					$(".boton-iniciar-video").css({ display: "none"});
 					$(".boton-parar-video").css({ display: "block"});
+										
 					$.get( "controlador/iniciarVideo.php", function( data ){});
-					//$('.boton-parar-video').fadeIn(100).delay(700).fadeOut(200, parpadear);					
+					
+					$(".texto-estado").text("Grabando vídeo...");
 				});
 				
 				$(".boton-parar-video").click(function(){				
 					$(".boton-parar-video").css({ display: "none"});
-					$(".boton-iniciar-video").css({ display: "block"});					
+					$(".boton-iniciar-video").css({ display: "block"});
+					
 					$.get( "controlador/pararVideo.php", function( data ){});
+					
+					if($(".boton-activar-mov").hasClass('disabled')){
+					
+						$(".texto-estado").text("Detección de movimiento activado");										
+					}
+					else{					
+						$(".texto-estado").text("Streaming");
+					}
+								
 				});
-				
-			});
 			
-			//function parpadear(){ $('.boton-parar-video').fadeIn(100).delay(700).fadeOut(200, parpadear) }
-	
+			});
+				
 	</script>
-
+	
     </head>
     <body onload="setTimeout('init();',100);" class="cuerpo-index blue">
 				 
@@ -170,33 +212,33 @@
 							$resul2 = $mysqli->query($query2);
 							$registro = $resul2->fetch_assoc();
 						?>
-						<div class="col m12 l12">
+						<div class="col s12 m12 l12">
 							<form action="controlador/modificar_BrConRot.php" method="POST">
 							  <div class="row">
-								<div class="col l3">
+								<div class="col s3 m3 l3">
 									<p class="text-BrConRot">Brillo</p>
 								</div>
-								<div class="col l8 offset-l1">
+								<div class="col s8 ofsset-s1 m8 offset-m1 l8 offset-l1">
 									<p class="range-field">
 									  <input type="range" class="brillo" name="brillo" min="0" max="100" value="<?php echo $registro['brightness']?>" />
 									</p>
 								</div>
 							  </div>
 							  <div class="row">
-								<div class="col l3">
+								<div class="col s3 m3 l3">
 									<p class="text-BrConRot">Contraste</p>
 								</div>
-								<div class="col l8 offset-l1">
+								<div class="col s8 ofsset-s1 m8 offset-m1 col l8 offset-l1">
 									<p class="range-field">
 									  <input type="range" class="contraste" name="contraste" min="-100" max="100" value="<?php echo $registro['contrast']?>"/>
 									</p>
 								</div>
 							  </div>
 							  <div class="row">
-								<div class="col l3">
+								<div class="col s3 m3 l3">
 									<p class="text-BrConRot">Rotación</p>
 								</div>
-								<div class="col l8 offset-l1">
+								<div class="col s8 ofsset-s1 m8 offset-m1 col l8 offset-l1">
 										<select class="browser-default rotacion" name="rotacion">
 										  <option <?php if($registro['rotation']==0){echo("selected ");}?> value="0">0</option>
 										  <option <?php if($registro['rotation']==90){echo("selected ");}?> value="90">90</option>
@@ -207,7 +249,7 @@
 								</div>
 							  </div>
 							  <div class="row">
-								<div class="col l12" align="center">
+								<div class="col s12 m12 l12" align="center">
 									<button type="submit" class="lighten-1 waves-effect waves-light btn purple"><i class="mdi-editor-mode-edit left"></i>Modificar</button>
 								</div>
 							  </div>						  
@@ -215,26 +257,26 @@
 						</div>
 					</div>
 				</div>
-				<div class="col m6 l6" style="margin-top:5%">
+				<div class="col s6 m6 l6" style="margin-top:3%">
 					<div><img id="mjpeg_dest" class="zoom-imagen" onclick="toggle_fullscreen(this);"/></div>
-					<div class="col m12 l12" style="font-weight:bold" align="center">
-						<h5 id="texto-estado" style="color:#FFFFFF"><h5>
+					<div class="col s12 m12 l12" style="font-weight:bold" align="center">
+						<h5 class="texto-estado" style="color:#FFFFFF"><h5>
 					</div>
 					
-					<div class="col m12 l12" style="margin-top:1%" align="center">
-						<div class="col m16 l6" align="center">
+					<div class="col s12 m12 l12" style="margin-top:1%" align="center">
+						<div class="col s6 m6 l6" align="center">
 							<a class="boton-foto lighten-1 waves-effect waves-light btn btn-large cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
 						</div>
-						<div class="col m16 l6" align="center">
+						<div class="col s6 m6 l6" align="center">
 							<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
 							<a class="boton-parar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px;display:none"><i class="mdi-av-stop"></i></a>
 
 						</div>
 					</div>
 				</div>
-				<div class="col m3 l3" style="margin-top:9%">
+				<div class="col s3 m3 l3" style="margin-top:9%">
 					<div class="row">
-						<div class="col m12 l12" align="center">
+						<div class="col s12 m12 l12" align="center">
 							
 							<div class="row">
 								<h4 style="color:white">Detección de movimiento</h4>
@@ -300,7 +342,12 @@
 			
 				<div class="col s12 l12 m12">
 					<div><img id="mjpeg_dest2" width="100%" class="zoom-imagen" onclick="toggle_fullscreen(this);"/></div>
-					<div class="col s12 m12 l12" style="margin-top:3%" align="center">
+					
+					<div class="col s12 m12 l12" style="font-weight:bold" align="center">
+						<h5 class="texto-estado" style="color:#FFFFFF;font-size:18px"><h5>
+					</div>
+					
+					<div class="col s12 m12 l12" style="margin-top:2%" align="center">
 						<div class="col s6 m6 l6" align="center">
 							<a class="boton-foto lighten-1 waves-effect waves-light btn cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
 						</div>

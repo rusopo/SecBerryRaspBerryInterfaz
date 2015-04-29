@@ -371,7 +371,7 @@
 								?>
 									<div class="col l4 m12 s12 item-general">					
 										<div class="col l12 m12 s12 gallery-img item-galeria-foto">
-											<div><img class="zoom-imagen responsive-img" onclick="toggle_fullscreen(this);" src="media/preview/<?php echo $fotoMov?>"></div>
+											<div><img class="responsive-img" src="media/preview/<?php echo $fotoMov?>"></div>
 										</div>
 										<div class="col m12 s12 l12 center item-galeria-texto">
 											<?php echo $fotoMov?>

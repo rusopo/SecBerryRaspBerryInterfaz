@@ -457,6 +457,7 @@ width:90%;
 
 .cuerpo-galeria{
 	overflow-y:auto;
+	max-height:100%;
 }
 
 #lista-galeria .active{
@@ -488,7 +489,6 @@ width: 50% !important;
 	left:0;
 	width:100%;
 	z-index:1040;
-	height:auto;
 	background-color:#ffffff;
 	z-index:1035;
 }
@@ -498,7 +498,6 @@ width: 50% !important;
 	top:0;
 	left:0;
 	width:100%;
-	height:auto;
 	z-index:1040;
 	cursor: zoom-out;
 }
