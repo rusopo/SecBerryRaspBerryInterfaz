@@ -67,6 +67,10 @@
 					$(".boton-activar-mov").addClass("desactivar-button");
 					$(".boton-desactivar-mov").removeClass("disabled");
 					$(".boton-desactivar-mov").removeClass("desactivar-button");
+					$(".boton-foto").addClass("disabled");
+					$(".boton-foto").addClass("desactivar-button");
+					$(".boton-iniciar-video").addClass("disabled");
+					$(".boton-iniciar-video").addClass("desactivar-button");
 					
 					$.get( "controlador/activar_mov.php", function( data ){});
 					
@@ -79,6 +83,10 @@
 					$(".boton-desactivar-mov").addClass("desactivar-button");
 					$(".boton-activar-mov").removeClass("disabled");
 					$(".boton-activar-mov").removeClass("desactivar-button");
+					$(".boton-foto").removeClass("disabled");
+					$(".boton-foto").removeClass("desactivar-button");
+					$(".boton-iniciar-video").removeClass("disabled");
+					$(".boton-iniciar-video").removeClass("desactivar-button");
 										
 					$.get( "controlador/desactivar_mov.php", function( data ){});
 					
@@ -170,8 +178,7 @@
 			  
 			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
 				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galeria</a></li>	
-		        <li><a href="historial.php"><i class="mdi-action-alarm"></i> Historial</a></li>
-		        <li><a href="estado.php"><i class="mdi-action-assignment"></i> Estado</a></li>
+		        <li><a href="historial.php"><i class="mdi-action-assignment"></i> Historial</a></li>
 		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
 		        <li><a href="#"><i class="mdi-action-help"></i> Ayuda</a></li>
 		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
@@ -193,8 +200,7 @@
 		        </li>
 				<li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
 				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galeria</a></li>
-		        <li id="Registro"><i class="mdi-action-alarm"></i><a href="historial.php">Historial</a></li>
-		        <li id="Estado"><i class="mdi-action-assignment"></i><a href="estado.php">Estado</a></li>
+		        <li id="Registro"><i class="mdi-action-assignment"></i><a href="historial.php">Historial</a></li>
 		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
 		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="@">Ayuda</a></li>
 		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
@@ -250,7 +256,7 @@
 							  </div>
 							  <div class="row">
 								<div class="col s12 m12 l12" align="center">
-									<button type="submit" class="lighten-1 waves-effect waves-light btn purple"><i class="mdi-editor-mode-edit left"></i>Modificar</button>
+									<button type="submit" class="lighten-1 waves-effect waves-light btn purple" style="margin-top:3%"><i class="mdi-editor-mode-edit left"></i>Modificar</button>
 								</div>
 							  </div>						  
 							</form>

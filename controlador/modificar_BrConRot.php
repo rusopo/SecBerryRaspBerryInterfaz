@@ -7,6 +7,7 @@ $query1 = "SELECT brightness,contrast,rotation FROM opciones WHERE id_usuario='"
 $linea = $mysqli->query($query1);
 $registro = $linea->fetch_assoc();
 
+
 if(empty($_POST['brillo'])){
 	$brillo=$registro['brightness'];
 }

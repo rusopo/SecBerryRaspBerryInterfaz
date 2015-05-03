@@ -136,8 +136,7 @@
 			  
 			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
 				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galeria</a></li>	
-		        <li><a href="historial.php"><i class="mdi-action-alarm"></i> Historial</a></li>
-		        <li><a href="estado.php"><i class="mdi-action-assignment"></i> Estado</a></li>
+		        <li><a href="historial.php"><i class="mdi-action-assignment"></i> Historial</a></li>
 		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
 		        <li><a href="#"><i class="mdi-action-help"></i> Ayuda</a></li>
 		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
@@ -159,8 +158,7 @@
 		        </li>
 		        <li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
 				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galeria</a></li>
-		        <li id="Registro"><i class="mdi-action-alarm"></i><a href="historial.php">Historial</a></li>
-		        <li id="Estado"><i class="mdi-action-assignment"></i><a href="estado.php">Estado</a></li>
+		        <li id="Registro"><i class="mdi-action-assignment"></i><a href="historial.php">Historial</a></li>
 		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
 		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="@">Ayuda</a></li>
 		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
@@ -187,7 +185,7 @@
 
 							<?php
 								$fotos = scandir("media/images/");
-								if(count($fotos) == 2) echo "<h5 class='white-text'>No tienes imágenes</h5>";
+								if(count($fotos) == 2) echo "<h5 class='white-text'>No tienes imágenes.</h5>";
 								else {
 									$contModalIm=0;
 									foreach($fotos as $foto) {
@@ -240,9 +238,9 @@
 													<div class="modal-content">
 														<h4 class="white-text" style="text-align:center">Compartir</h4>
 														<div class="social hidden-xs">
-														  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-														  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-														  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+														  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $foto?>&t=Esta imagen es compartida por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+														  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $foto?>&text=Esta imagen es compartida por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+														  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $foto?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 														</div>
 													</div>
 													<div class="modal-footer blue">
@@ -265,7 +263,7 @@
 							
 							<?php
 								$videos = scandir("media/videos/");
-								if(count($videos) == 2) echo "<h5 class='white-text'>No tienes vídeos</h5>";
+								if(count($videos) == 2) echo "<h5 class='white-text'>No tienes vídeos.</h5>";
 								else {
 									$contModalVid=0;
 									foreach($videos as $video) {
@@ -321,9 +319,9 @@
 												<div class="modal-content">
 													<h4 class="white-text" style="text-align:center">Compartir</h4>
 													<div class="social hidden-xs">
-													  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-													  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-													  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+													  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $video?>&t=Este video es compartido por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+													  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $video?>&text=Este video es compartido por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+													  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $video?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 													</div>
 												</div>
 												<div class="modal-footer blue">
@@ -362,7 +360,7 @@
 					
 						<?php
 								$fotosMov = scandir("media/images/");
-								if(count($fotosMov) == 2) echo "<h5 class='white-text'>No tienes imágenes</h5>";
+								if(count($fotosMov) == 2) echo "<h5 class='white-text'>No tienes imágenes.</h5>";
 								else {
 									$contModalImMov=0;
 									foreach($fotosMov as $fotoMov) {
@@ -415,9 +413,9 @@
 													<div class="modal-content">
 														<h4 class="white-text" style="text-align:center">Compartir</h4>
 														<div class="social hidden-xs">
-														  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-														  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-														  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+														  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $fotoMov?>&t=Esta imagen es compartida por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+														  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $fotoMov?>&text=Esta imagen es compartida por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+														  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $fotoMov?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 														</div>
 													</div>
 													<div class="modal-footer blue">
@@ -441,7 +439,7 @@
 						
 						<?php
 								$videosMov = scandir("media/videos/");
-								if(count($videosMov) == 2) echo "<h5 class='white-text'>No tienes vídeos</h5>";
+								if(count($videosMov) == 2) echo "<h5 class='white-text'>No tienes vídeos.</h5>";
 								else {
 									$contModalVidMov=0;
 									foreach($videosMov as $videoMov) {
@@ -497,9 +495,9 @@
 												<div class="modal-content">
 													<h4 class="white-text" style="text-align:center">Compartir</h4>
 													<div class="social hidden-xs">
-													  <a href="http://www.facebook.com/sharer.php?u=http://www.example.com/&t=Texto" class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-													  <a href="http://twitter.com/share?url=http://www.example.com/&text=Texto" class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-													  <a href="https://plus.google.com/share?url=http%3A%2F%2Fexample.com" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+													  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $videoMov?>&t=Este video es compartido por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+													  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $videoMov?>&text=Este video es compartido por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+													  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $videoMov?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 													</div>
 												</div>
 												<div class="modal-footer blue">
