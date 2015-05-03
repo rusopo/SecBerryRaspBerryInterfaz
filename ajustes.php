@@ -88,6 +88,12 @@
 					$.get( "controlador/borrarTodosVideos.php");					
 				});
 				
+				$(".boton-borrar-todo-historial").click(function () {
+					var id = $(this).parent().parent().attr("id");
+					$('#'+id).closeModal();
+					$.get( "controlador/borrarTodoHistorial.php");					
+				});
+				
 				$(".boton-reiniciar-sistema").click(function () {
 					var id = $(this).parent().parent().attr("id");
 					$('#'+id).closeModal();
@@ -249,7 +255,7 @@
 						      <p>Una vez lo hagas no podras volver a recuperar los archivos.</p>
 						    </div>
 						    <div class="col l12 m12 s12 blue" style="text-align:right">									
-								  <a href ="controlador/borrarTodasFotos.php" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-borrar-todas-fotos"><i class="mdi-navigation-check left"></i>Si</a>									
+								  <a class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-borrar-todas-fotos"><i class="mdi-navigation-check left"></i>Si</a>									
 								  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 							</div>
 						  </div>
@@ -264,7 +270,22 @@
 						      <p>Una vez lo hagas no podras volver a recuperar los archivos.</p>
 						    </div>
 						    <div class="col l12 m12 s12 blue" style="text-align:right">									
-								  <a href ="controlador/borrarTodosVideos.php" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-borrar-todos-videos"><i class="mdi-navigation-check left"></i>Si</a>									
+								  <a class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-borrar-todos-videos"><i class="mdi-navigation-check left"></i>Si</a>									
+								  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
+							</div>
+						  </div>
+					    </li>
+						<li class="collection-item avatar li-ajustes-item" href="#modalBorrarTodoHistorial">
+					      <i class="mdi-action-event circle red"></i>
+					      <span class="title"><h5 style="font-weight:bold">Borrar historial</h5></span><br/>
+					       <!-- Modal Structure -->
+						   <div id="modalBorrarTodoHistorial" class="modal blue" >
+						    <div class="modal-content white-text" style="text-align:left">
+						      <h4>¿Seguro que deseas borrar TODO tu historial?</h4>
+						      <p>Una vez lo hagas no podras volver a recuperarlo.</p>
+						    </div>
+						    <div class="col l12 m12 s12 blue" style="text-align:right">									
+								  <a class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-borrar-todo-historial"><i class="mdi-navigation-check left"></i>Si</a>									
 								  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 							</div>
 						  </div>
@@ -279,7 +300,7 @@
 									  <p>Una vez reiniciado, intente de nuevo la conexión pasado 1 minuto</p>
 									</div>
 									<div class="col l12 m12 s12 blue" style="text-align:right">									
-										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-reiniciar-sistema"><i class="mdi-navigation-check left"></i>Si</a>									
+										  <a class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-reiniciar-sistema"><i class="mdi-navigation-check left"></i>Si</a>									
 										  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 									</div>
 								  </div>
@@ -294,7 +315,7 @@
 									  <p>Tenga en cuenta que si apaga el sistema solo puede volver a encenderse fisícamente desde el aparato.Desconecte y vuelva a conectar el cable</p>
 									</div>
 									<div class="col l12 m12 s12 blue" style="text-align:right">									
-										  <a href ="" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-apagar-sistema"><i class="mdi-navigation-check left"></i>Si</a>									
+										  <a class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-apagar-sistema"><i class="mdi-navigation-check left"></i>Si</a>									
 										  <a href="ajustes.php" class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4"><i class="mdi-navigation-close left"></i>No</a>									  									  
 									</div>
 								  </div>						  

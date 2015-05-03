@@ -23,6 +23,12 @@ if(isset($_POST['boton-inicio-confirmar']) || isset($_POST['boton-inicio-confirm
 		fwrite($file, $_SESSION['id-usuario-logueado']);
 		fclose($file);
 		
+		$fecha = date("Y-m-d H:i:s");
+		$id_usuario=$_SESSION['id-usuario-logueado'];
+		
+		$query2 = "INSERT INTO historial(id_usuario, id_comando, fecha)VALUES ('$id_usuario',1,'$fecha')";
+		$mysqli->query($query2);
+		
 		header("Location: ../streaming.php");
 		
 	}	

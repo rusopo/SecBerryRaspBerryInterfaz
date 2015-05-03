@@ -21,9 +21,13 @@ else{
 	$contraste= $_POST['contraste'];
 }
 
-
 $rotacion= $_POST['rotacion'];
 
+$fecha = date("Y-m-d H:i:s");
+$id_usuario=$_SESSION['id-usuario-logueado'];
+
+$query2 = "INSERT INTO historial(id_usuario, id_comando, fecha)VALUES ('$id_usuario',4,'$fecha')";
+$mysqli->query($query2);
 
 $exec="/bin/sh /var/www/SecBerry/sh/options.sh ".$registro['brightness']." ".$brillo." ".$registro['contrast']." ".$contraste." ".$registro['rotation']." ".$rotacion;
 system($exec);

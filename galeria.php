@@ -195,19 +195,19 @@
 											$fsz = round ((filesize("media/images/" . $foto)) / (1024 * 1024));			
 								?>
 									<div class="col l4 m12 s12 item-general">					
-										<div class="col l12 m12 s12 gallery-img item-galeria-foto">
+										<div class="col l12 m12 s12 center gallery-img item-galeria-foto">
 											<div><img class="zoom-imagen responsive-img" onclick="toggle_fullscreen(this);" src="media/preview/<?php echo $foto?>"></div>
 										</div>
 										<div class="col m12 s12 l12 center item-galeria-texto">
 											<?php echo $foto?>
 										</div>
-										<div class="col m12 s12 l12 item-galeria-botones">
+										<div class="col m12 s12 l12 center item-galeria-botones">
 											<div class="col s4 m4 l4">
 												<!-- Modal Trigger -->
 												<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarImagen<?php echo $contModalIm?>"><i class="mdi-file-file-download center"></i></a>
 												<!-- Modal Structure -->
 												  <div id="modalDescargarImagen<?php echo $contModalIm?>" class="modal blue">
-													<div class="modal-content white-text">
+													<div class="modal-content white-text" style="text-align:left">
 													  <h4>¿Deseas descargarte este archivo?</h4>
 													  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 													</div>
@@ -222,7 +222,7 @@
 												<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarImagen<?php echo $contModalIm?>"><i class="mdi-action-delete center"></i></a>
 												<!-- Modal Structure -->
 												  <div id="modalBorrarImagen<?php echo $contModalIm?>" class="modal blue">
-													<div class="modal-content white-text">
+													<div class="modal-content white-text" style="text-align:left">
 													  <h4>¿Seguro que deseas Borrar?</h4>
 													  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 													</div>
@@ -274,7 +274,7 @@
 								?>
 								
 								<div class="col l4 m12 s12 item-general">
-									<div class="col l12 m12 s12 gallery-img item-video">
+									<div class="col l12 m12 s12 center gallery-img item-video">
 										<video width="100%" controls>
 											<source src="media/videos/<?php echo $video ?>" type="video/mp4">
 										</video>
@@ -282,13 +282,13 @@
 									<div class="col l12 m12 s12 center item-galeria-texto-video">
 										<?php echo $video?>
 									</div>
-									<div class="col l12 s12 m12 item-galeria-botones">
+									<div class="col l12 s12 m12 center item-galeria-botones">
 										<div class="col s4 m4 l4">
 											<!-- Modal Trigger -->
 											<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarVideo<?php echo $contModalVid?>"><i class="mdi-file-file-download center"></i></a>
 											<!-- Modal Structure -->
 											  <div id="modalDescargarVideo<?php echo $contModalVid?>" class="modal blue">
-												<div class="modal-content white-text">
+												<div class="modal-content white-text" style="text-align:left">
 												  <h4>¿Deseas descargarte este archivo?</h4>
 												  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 												</div>
@@ -303,7 +303,7 @@
 											<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarVideo<?php echo $contModalVid?>"><i class="mdi-action-delete center"></i></a>
 											<!-- Modal Structure -->
 											  <div id="modalBorrarVideo<?php echo $contModalVid?>" class="modal blue">
-												<div class="modal-content white-text">
+												<div class="modal-content white-text" style="text-align:left">
 												  <h4>¿Seguro que deseas Borrar?</h4>
 												  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 												</div>
@@ -370,19 +370,19 @@
 											$fsz = round ((filesize("media/images/" . $fotoMov)) / (1024 * 1024));			
 								?>
 									<div class="col l4 m12 s12 item-general">					
-										<div class="col l12 m12 s12 gallery-img item-galeria-foto">
+										<div class="col l12 m12 s12 center gallery-img item-galeria-foto">
 											<div><img class="responsive-img" src="media/preview/<?php echo $fotoMov?>"></div>
 										</div>
 										<div class="col m12 s12 l12 center item-galeria-texto">
 											<?php echo $fotoMov?>
 										</div>
-										<div class="col m12 s12 l12 item-galeria-botones">
+										<div class="col m12 s12 l12 center item-galeria-botones">
 											<div class="col s4 m4 l4">
 												<!-- Modal Trigger -->
 												<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarImagenMov<?php echo $contModalImMov?>"><i class="mdi-file-file-download center"></i></a>
 												<!-- Modal Structure -->
 												  <div id="modalDescargarImagenMov<?php echo $contModalImMov?>" class="modal blue">
-													<div class="modal-content white-text">
+													<div class="modal-content white-text" style="text-align:left">
 													  <h4>¿Deseas descargarte este archivo?</h4>
 													  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 													</div>
@@ -397,7 +397,7 @@
 												<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarImagenMov<?php echo $contModalImMov?>"><i class="mdi-action-delete center"></i></a>
 												<!-- Modal Structure -->
 												  <div id="modalBorrarImagenMov<?php echo $contModalImMov?>" class="modal blue">
-													<div class="modal-content white-text">
+													<div class="modal-content white-text" style="text-align:left">
 													  <h4>¿Seguro que deseas Borrar?</h4>
 													  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 													</div>
@@ -450,7 +450,7 @@
 								?>
 								
 								<div class="col l4 m12 s12 item-general">
-									<div class="col l12 m12 s12 gallery-img item-video">
+									<div class="col l12 m12 s12 center gallery-img item-video">
 										<video width="100%" controls>
 											<source src="media/videos/<?php echo $videoMov ?>" type="video/mp4">
 										</video>
@@ -458,13 +458,13 @@
 									<div class="col l12 m12 s12 center item-galeria-texto-video">
 										<?php echo $videoMov?>
 									</div>
-									<div class="col l12 s12 m12 item-galeria-botones">
+									<div class="col l12 s12 m12 center item-galeria-botones">
 										<div class="col s4 m4 l4">
 											<!-- Modal Trigger -->
 											<a class="waves-effect waves-light btn modal-trigger boton-galeria" href="#modalDescargarVideoMov<?php echo $contModalVidMov?>"><i class="mdi-file-file-download center"></i></a>
 											<!-- Modal Structure -->
 											  <div id="modalDescargarVideoMov<?php echo $contModalVidMov?>" class="modal blue">
-												<div class="modal-content white-text">
+												<div class="modal-content white-text" style="text-align:left">
 												  <h4>¿Deseas descargarte este archivo?</h4>
 												  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 												</div>
@@ -479,7 +479,7 @@
 											<a class="waves-effect waves-light btn modal-trigger red lighten-1 boton-galeria" href="#modalBorrarVideoMov<?php echo $contModalVidMov?>"><i class="mdi-action-delete center"></i></a>
 											<!-- Modal Structure -->
 											  <div id="modalBorrarVideoMov<?php echo $contModalVidMov?>" class="modal blue">
-												<div class="modal-content white-text">
+												<div class="modal-content white-text" style="text-align:left">
 												  <h4>¿Seguro que deseas Borrar?</h4>
 												  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 												</div>

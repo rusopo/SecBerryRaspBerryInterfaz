@@ -14,6 +14,12 @@ $resul = $mysqli->query($query1);
 
 $fila = $resul->fetch_assoc();
 
+$fecha = date("Y-m-d H:i:s");
+$id_usuario=$contenido;
+
+$query2 = "INSERT INTO historial(id_usuario, id_comando, fecha)VALUES ('$id_usuario',5,'$fecha')";
+$mysqli->query($query2);
+
 system("/bin/sh /var/www/SecBerry/sh/mailing.sh " .$fila['correo']);
 
 ?>

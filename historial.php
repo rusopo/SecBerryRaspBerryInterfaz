@@ -60,13 +60,8 @@ function nombremes($mes){
 
       </script>
 
-	<script type="text/javascript">
-			
-	</script>
-
     </head>
     <body class="blue">
-
 
 		 <nav>
 		    <div class="nav-wrapper  blue lighten-1 ">
@@ -119,53 +114,74 @@ function nombremes($mes){
 		    </div>
 		  </nav>
 
-<?php
-	error_reporting(E_ALL);
-
-	$id_user=4;
-
-	$query_fecha_numCada="SELECT DATE_FORMAT(fecha, '%Y-%m-%d')AS fecha_col,COUNT(*) num_reg   FROM historial WHERE id_usuario=4 GROUP BY DATE_FORMAT(fecha, '%Y-%m-%d') DESC";
-	//$query_cada_dia="SELECT * FROM historial WHERE id_usuario='$id_user' AND  DATE_FORMAT(fecha, '%Y-%m-%d')= '$num_reg_dia' ORDER BY fecha ASC";
-	$resultado=$mysqli->query($query_fecha_numCada); 
-	/*$cont_fila = mysql_fetch_array($resultado);*/
-	$numero_fechas = $resultado->num_rows;
-	echo '$numero_fechas'.$numero_fechas.'<br>';
-?>
-
+			<?php
+				$query_fecha_numCada="SELECT DATE_FORMAT(fecha, '%Y-%m-%d')AS fecha_col,COUNT(*) num_reg FROM historial WHERE id_usuario='".$_SESSION['id-usuario-logueado']."' GROUP BY DATE_FORMAT(fecha, '%Y-%m-%d') DESC";
+				$resultado=$mysqli->query($query_fecha_numCada); 
+				$numero_fechas = $resultado->num_rows;
+			?>
 
 		<div><!--container-->
 			<div class="row">
 				<div class="col s12 l6 offset-l3 z-depth-2 " >
 					<ul class="collection blue ">
-<?php
-	
-while($cont_fila = $resultado->fetch_assoc()) {
-	//echo '<h1>fecha_col '.$cont_fila['fecha_col'].'  ';
-	//echo ' num_reg '.$cont_fila['num_reg'].'</h1><br>';
-	$num_reg_dia=$cont_fila['fecha_col'];
-
-?>
-					    <li class="collection-header  white-text" style="text-align:center"  style="text-align:center"><h4>
-					    <?php echo date("d",strtotime($cont_fila['fecha_col'])).' de '.nombremes(date("m",strtotime($cont_fila['fecha_col']))).' de '
-					    .date("y",strtotime($cont_fila['fecha_col']));?>
-					    </h4></li>
-<?php
-	$resultado2=$mysqli->query("SELECT * FROM historial NATURAL JOIN comando_historial WHERE id_usuario='$id_user' AND  DATE_FORMAT(fecha, '%Y-%m-%d')= '$num_reg_dia' ORDER BY fecha DESC");
-	while($cont_cada_dia =$resultado2->fetch_assoc()) { 
-?>
-					    <li class="collection-item avatar">
-		   			      <i class="mdi-file-folder circle"></i>
-					      <span class="title"><?php echo $cont_cada_dia['comando'].' '; ?></span>
-					      <p><?php echo date("H:m:s",strtotime($cont_cada_dia['fecha'])).'<br>'.date("d/m/Y",strtotime($cont_cada_dia['fecha'])); ; ?>
-					      </p>
-					      <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
-					    </li>
-<?php
-			
-		} 
-   }
-
-?>
+						<?php
+						if($numero_fechas==0){ ?>
+							<li class="collection-item avatar li-historial">
+								<h5 style="color:red"><strong>El historial esta vacío.</strong></h5>
+							</li>
+						<?php 
+						}
+						else{
+										
+							while($cont_fila = $resultado->fetch_assoc()) {						
+								$num_reg_dia=$cont_fila['fecha_col'];
+							?>
+							<li class="collection-header white-text" style="text-align:center"  style="text-align:center"><h4><strong>
+							<?php echo date("d ",strtotime($cont_fila['fecha_col'])) .nombremes(date("m",strtotime($cont_fila['fecha_col']))).' de '
+							.date("Y",strtotime($cont_fila['fecha_col']));?>
+							</strong></h4></li>
+							<?php
+								$resultado2=$mysqli->query("SELECT * FROM historial NATURAL JOIN comando_historial WHERE id_usuario='".$_SESSION['id-usuario-logueado']."' AND  DATE_FORMAT(fecha, '%Y-%m-%d')= '$num_reg_dia' ORDER BY fecha DESC");
+								while($cont_cada_dia =$resultado2->fetch_assoc()) { 
+							?>
+							<li class="collection-item avatar li-historial">
+								
+							  <?php if(utf8_encode($cont_cada_dia['id_comando'])==1){?>						  
+								<i class="mdi-action-settings-power circle green"></i>						  
+							  <?php }
+							  else if(utf8_encode($cont_cada_dia['id_comando'])==2){ ?>
+								<i class="mdi-image-photo-camera circle indigo"></i>
+							  <?php } 
+							  else if(utf8_encode($cont_cada_dia['id_comando'])==3){ ?>
+								<i class="mdi-av-videocam circle teal"></i>
+							  <?php } 
+							  else if(utf8_encode($cont_cada_dia['id_comando'])==4){ ?>
+								<i class="mdi-editor-mode-edit circle purple"></i>
+							  <?php } 
+							  else if(utf8_encode($cont_cada_dia['id_comando'])==5){ ?>
+								<i class="mdi-communication-email circle light-blue"></i>
+							  <?php } 
+							  else if(utf8_encode($cont_cada_dia['id_comando'])==6){ ?>
+								<i class="mdi-device-gps-not-fixed circle orange"></i>
+							  <?php } 
+							  else if(utf8_encode($cont_cada_dia['id_comando'])==7){ ?>
+								<i class="mdi-device-gps-off circle deep-orange"></i>
+							  <?php } 
+							  else if(utf8_encode($cont_cada_dia['id_comando'])==8){ ?>
+								<i class="mdi-action-settings-power circle red"></i>
+							  <?php } ?>
+							  
+							  <span class="title"><strong><?php echo utf8_encode($cont_cada_dia['comando'])?></strong></span>
+							  <p><?php echo date("G:i:s",strtotime($cont_cada_dia['fecha'])).'<br>'.date("d/m/Y",strtotime($cont_cada_dia['fecha']))?>
+							  </p>
+							  
+							</li>
+							<?php
+										
+								} 
+							}
+						}
+						?>
 				    
 					 </ul>
 				</div>
