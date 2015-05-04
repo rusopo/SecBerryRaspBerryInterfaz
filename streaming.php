@@ -109,16 +109,23 @@
 				$(".boton-foto").click(function(){	
 				
 					$(".texto-estado").text("Capturando foto...");
+
+					$(this).addClass("disabled");
+					$(this).addClass("desactivar-button");
 					
 					$.get( "controlador/hacerFoto.php", function( data ){});
 					
 					setTimeout(function() {
 					    //do something special 
 						if($(".boton-activar-mov").hasClass('disabled')){
-					
-						$(".texto-estado").text("Detección de movimiento activado");										
+
+							$(".boton-foto").removeClass("disabled");
+							$(".boton-foto").removeClass("desactivar-button");
+							$(".texto-estado").text("Detección de movimiento activado");										
 						}
-						else{					
+						else{
+							$(".boton-foto").removeClass("disabled");
+							$(".boton-foto").removeClass("desactivar-button");					
 							$(".texto-estado").text("Streaming");
 						}
 					  }, 2000);
@@ -164,7 +171,7 @@
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
 			  <ul class="left">
-				<li class="li-especial"><a href="streaming.php"><img src="images/Secberry_logo.png" alt="" height="56px" width="85px" ></a></li>
+				<li class="li-especial"><a href="streaming.php"><img src="images/Secberry_logo.png" alt="" height="58px" width="90px" ></a></li>
 			  </ul>
 			  <ul class="left hide-on-med-and-down">
 				<?php $consul = "SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
@@ -177,10 +184,10 @@
 		      <ul class="right hide-on-med-and-down">
 			  
 			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
-				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galeria</a></li>	
+				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galería</a></li>	
 		        <li><a href="historial.php"><i class="mdi-action-assignment"></i> Historial</a></li>
 		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
-		        <li><a href="#"><i class="mdi-action-help"></i> Ayuda</a></li>
+		        <li><a href="ayuda.php"><i class="mdi-action-help"></i> Ayuda</a></li>
 		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
 		      </ul>
 		      <ul class="side-nav " id="mobile-demo" >
@@ -199,10 +206,10 @@
 			    </div>
 		        </li>
 				<li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
-				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galeria</a></li>
+				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galería</a></li>
 		        <li id="Registro"><i class="mdi-action-assignment"></i><a href="historial.php">Historial</a></li>
 		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
-		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="@">Ayuda</a></li>
+		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="ayuda.php">Ayuda</a></li>
 		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
 		      </ul>
 		    </div>
@@ -256,31 +263,41 @@
 							  </div>
 							  <div class="row">
 								<div class="col s12 m12 l12" align="center">
-									<button type="submit" class="lighten-1 waves-effect waves-light btn purple" style="margin-top:3%"><i class="mdi-editor-mode-edit left"></i>Modificar</button>
+									<button type="submit" class="lighten-1 waves-effect waves-light btn purple" style="margin-top:5%"><i class="mdi-editor-mode-edit left"></i>Modificar</button>
 								</div>
 							  </div>						  
 							</form>
 						</div>
 					</div>
 				</div>
-				<div class="col s6 m6 l6" style="margin-top:3%">
+				<div class="col s6 m6 l6" style="margin-top:2%">
 					<div><img id="mjpeg_dest" class="zoom-imagen" onclick="toggle_fullscreen(this);"/></div>
 					<div class="col s12 m12 l12" style="font-weight:bold" align="center">
 						<h5 class="texto-estado" style="color:#FFFFFF"><h5>
 					</div>
 					
 					<div class="col s12 m12 l12" style="margin-top:1%" align="center">
-						<div class="col s6 m6 l6" align="center">
-							<a class="boton-foto lighten-1 waves-effect waves-light btn btn-large cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
-						</div>
-						<div class="col s6 m6 l6" align="center">
-							<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
-							<a class="boton-parar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px;display:none"><i class="mdi-av-stop"></i></a>
-
-						</div>
+						<?php if($registro['motion_detection']==0){ ?>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-foto lighten-1 waves-effect waves-light btn btn-large cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+							</div>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
+								<a class="boton-parar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px;display:none"><i class="mdi-av-stop"></i></a>
+							</div>
+						<?php }
+						else if($registro['motion_detection']==1){ ?>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-foto lighten-1 waves-effect waves-light btn btn-large cyan lighten-1 desactivar-button disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+							</div>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1 desactivar-button disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
+								<a class="boton-parar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px;display:none"><i class="mdi-av-stop"></i></a>
+							</div>
+						<?php } ?>
 					</div>
 				</div>
-				<div class="col s3 m3 l3" style="margin-top:9%">
+				<div class="col s3 m3 l3" style="margin-top:6%">
 					<div class="row">
 						<div class="col s12 m12 l12" align="center">
 							
@@ -294,18 +311,18 @@
 								
 								<?php if($register['motion_detection']==0){ ?>
 								<div class="row">
-									<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov"><i class="mdi-navigation-check left"></i>Activado</a>
+									<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov"><i class="mdi-navigation-check left"></i>Activar</a>
 								</div>
 								<div class="row">
-									<a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red disabled desactivar-button boton-desactivar-mov"><i class="mdi-navigation-close left"></i>Desactivado</a>
+									<a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red disabled desactivar-button boton-desactivar-mov"><i class="mdi-navigation-close left"></i>Desactivar</a>
 								</div>
 								<?php } 
 								else if($register['motion_detection']==1){ ?>
 								<div class="row">
-									<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov disabled activar-button"><i class="mdi-navigation-check left"></i> Activado</a>
+									<a id="boton-activar-movimiento" class="waves-effect waves-light btn boton-activar-mov disabled activar-button"><i class="mdi-navigation-check left"></i> Activar</a>
 								</div>
 								<div class="row">
-								    <a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red boton-desactivar-mov"><i class="mdi-navigation-close left"></i> Desactivado</a>
+								    <a id="boton-desactivar-movimiento" class="waves-effect waves-light btn red boton-desactivar-mov"><i class="mdi-navigation-close left"></i> Desactivar</a>
 								</div>
 								<?php } ?>
 						</div>
@@ -354,13 +371,24 @@
 					</div>
 					
 					<div class="col s12 m12 l12" style="margin-top:2%" align="center">
-						<div class="col s6 m6 l6" align="center">
-							<a class="boton-foto lighten-1 waves-effect waves-light btn cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
-						</div>
-						<div class="col s6 m6 l6" align="center">
-							<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn red lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
-							<a class="boton-parar-video lighten-1 waves-effect waves-light btn red lighten-1" style="width:100%;text-align:center;margin-bottom:0px;display:none"><i class="mdi-av-stop"></i></a>
-						</div>
+						<?php if($register['motion_detection']==0){ ?>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-foto lighten-1 waves-effect waves-light btn cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+							</div>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn red lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
+								<a class="boton-parar-video lighten-1 waves-effect waves-light btn red lighten-1" style="width:100%;text-align:center;margin-bottom:0px;display:none"><i class="mdi-av-stop"></i></a>
+							</div>
+						<?php }
+						else if($register['motion_detection']==1){ ?>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-foto lighten-1 waves-effect waves-light btn cyan lighten-1 boton-desactivar-mov disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+							</div>
+							<div class="col s6 m6 l6" align="center">
+								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn red lighten-1 boton-desactivar-mov disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
+								<a class="boton-parar-video lighten-1 waves-effect waves-light btn red lighten-1" style="width:100%;text-align:center;margin-bottom:0px;display:none"><i class="mdi-av-stop"></i></a>
+							</div>
+						<?php } ?>
 					</div>
 				</div>
 				

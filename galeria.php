@@ -122,7 +122,7 @@
 		    <div class="nav-wrapper  blue lighten-1">
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="left">
-				<li class="li-especial"><a href="streaming.php"><img src="images/Secberry_logo.png" alt="" height="56px" width="85px" ></a></li>
+				<li class="li-especial"><a href="streaming.php"><img src="images/Secberry_logo.png" alt="" height="58px" width="90px" ></a></li>
 			  </ul>
 			  <ul class="left hide-on-med-and-down">
 				<?php $consul = "SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
@@ -135,10 +135,10 @@
 		      <ul class="right hide-on-med-and-down">
 			  
 			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
-				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galeria</a></li>	
+				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galería</a></li>	
 		        <li><a href="historial.php"><i class="mdi-action-assignment"></i> Historial</a></li>
 		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
-		        <li><a href="#"><i class="mdi-action-help"></i> Ayuda</a></li>
+		        <li><a href="ayuda.php"><i class="mdi-action-help"></i> Ayuda</a></li>
 		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
 		      </ul>
 		      <ul class="side-nav" id="mobile-demo" >
@@ -157,10 +157,10 @@
 			    </div>
 		        </li>
 		        <li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
-				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galeria</a></li>
+				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galería</a></li>
 		        <li id="Registro"><i class="mdi-action-assignment"></i><a href="historial.php">Historial</a></li>
 		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
-		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="@">Ayuda</a></li>
+		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="ayuda.php">Ayuda</a></li>
 		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
 		      </ul>
 		    </div>
