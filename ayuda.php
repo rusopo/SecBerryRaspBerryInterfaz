@@ -1,4 +1,7 @@
 <?php
+
+	ini_set("session.cookie_lifetime","7200");
+	ini_set("session.gc_maxlifetime","7200");
 	session_start(); 
 	include("conexion.php");
 
@@ -58,8 +61,21 @@
     </head>
     <body class="blue">
 
+    	<?php
+    	error_reporting(0);
+    	if($_SESSION['mostrarPagina'] != 1){ ?>
+
+    	<div class="row">
+    		<div class="col l12 s12 m12" align="center">
+    			<h5 style="color:white"><strong>Para poder visualizar la página necesita estar registrado.</strong></h5>
+    		</div>
+    	</div>
+    	<?php } 
+
+    	else{ ?>
+
 		 <nav>
-		    <div class="nav-wrapper  blue lighten-1 ">
+		    <div class="nav-wrapper  pink lighten-1 ">
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
 			  <ul class="left">
@@ -75,14 +91,14 @@
 			  </ul>
 		      <ul class="right hide-on-med-and-down">
 			  
-			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
-				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galería</a></li>	
-		        <li><a href="historial.php"><i class="mdi-action-assignment"></i> Historial</a></li>
-		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
-		        <li><a href="ayuda.php"><i class="mdi-action-help"></i> Ayuda</a></li>
-		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
+			    <li><a href="streaming.php"><i class="mdi-action-visibility li-nav-mio"></i> <strong>Streaming </strong></a></li>
+				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper li-nav-mio"></i><strong> Galería</strong></a></li>	
+		        <li><a href="historial.php"><i class="mdi-action-assignment li-nav-mio"></i><strong> Historial</strong></a></li>
+		        <li><a href="ajustes.php"><i class="small mdi-action-settings li-nav-mio"></i><strong> Ajustes</strong></a></li>
+		        <li class="active"><a href="ayuda.php"><i class="mdi-action-help li-nav-mio"></i><strong> Ayuda</strong></a></li>
+		        <li style="padding-right:12px"><a href="controlador/logout.php"><i class="mdi-action-exit-to-app li-nav-mio"></i><strong> Salir</strong></a></li>
 		      </ul>
-		      <ul class="side-nav" id="mobile-demo" >
+		      <ul class="side-nav " id="mobile-demo" >
 		        <li id="Perfil" style="display:inline-block">
 		        <div>
 					<?php $query1 = "SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
@@ -97,12 +113,12 @@
 			        </div>
 			    </div>
 		        </li>
-		        <li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
-				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galería</a></li>
-		        <li id="Registro"><i class="mdi-action-assignment"></i><a href="historial.php">Historial</a></li>
-		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
-		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="ayuda.php">Ayuda</a></li>
-		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
+				<li id="Streaming"><a href="streaming.php"><i class="mdi-action-visibility left"></i><strong>Streaming</strong></a></li>
+				<li id="Galeria"><a href="galeria.php"><i class="mdi-device-now-wallpaper left"></i><strong>Galería</strong></a></li>
+		        <li id="Registro"><a href="historial.php"><i class="mdi-action-assignment left"></i><strong>Historial</strong></a></li>
+		        <li id="Ajustes"><a href="ajustes.php"><i class="small mdi-action-settings left"></i><strong>Ajustes</strong></a></li>
+		        <li class="active" id="Ayuda"><a href="ayuda.php"><i class="mdi-action-help left"></i><strong>Ayuda</strong></a></li>
+		        <li id="Salir"><a href="controlador/logout.php"><i class="mdi-action-exit-to-app left"></i><strong>Salir</strong></a></li>
 		      </ul>
 		    </div>
 		  </nav>
@@ -119,30 +135,30 @@
 					</ul>
 					<ul class="collapsible" data-collapsible="accordion">
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Cómo se realiza una foto o un vídeo?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help orange"></i><strong>¿Cómo se realiza una foto o un vídeo?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>Para poder realizar una foto: Ventana Streaming -> pulsamos sobre el botón con el símbolo de una cámara.<br>
 					      	Para realizar un vídeo se sigue los mismos pasos pero pulsamos el botón de una cámara de vídeo, en ese momento se comienza a grabar y para pararlo pulsamos el nuevo botón de STOP que aparece.
 					      </p>
 					      </div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Qué pasa cuando activamos la detección de movimiento?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help lime"></i><strong>¿Qué pasa cuando activamos la detección de movimiento?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>Una vez activado en la ventana Streaming la detección de movimiento, entra en funcionamiento el módulo de Motion cuyo objetivo es en el momento que se detecta un movimiento se envía un correo al usuario indicando que se ha producido un movimiento, en ese instante se realiza una foto y un vídeo de unos 10 segundos.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Se puede realizar una foto o un vídeo con la detección de movimiento activada?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help red"></i><strong>¿Se puede realizar una foto o un vídeo con la detección de movimiento activada?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>No, no es posible realizar una foto o un vídeo en el momento que la detección de movimiento se encuentra activada. Como se puede observar los botones correspondientes se encuentran desactivados.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Cómo funciona el cambio de parámetros?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help purple"></i><strong>¿Cómo funciona el cambio de parámetros?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>Si usted desea cambiar los parámetros disponibles como el brillo,contraste o la rotación del streaming lo puede hacer desde la ventana de streaming. Los cambios se pueden realizar todos a la vez o solo el que desee modificar, una vez escogido el nuevo parámetro tiene que pulsar en modificar para que se realicen los cambios pertinentes.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Cómo funciona la galería?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help orange"></i><strong>¿Cómo funciona la galería?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>En la galería usted podrá visualizar por separado los vídeos y las imágenes. Como se puede observar en cada una por separado tiene tres opciones que poder realizar: descargar, eliminar y compartir.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Qué opciones puede realizar el usuario con una foto o un vídeo en la galería?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help teal"></i><strong>¿Qué opciones puede realizar el usuario con una foto o un vídeo en la galería?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>En cada foto o vídeo usted puede: <br>
 					      	Descargar: Si pulsa a que sí el archivo se descargará en su dispositivo. <br>
 					      	Eliminar: Si pulsa a que sí eliminará este archivo y no lo podrá recuperar.<br>
@@ -150,33 +166,33 @@
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Para qué sirve el historial?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help orange"></i><strong>¿Para qué sirve el historial?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>En la ventana de historial se recogerán los movimientos de Conexión,Foto,Video,Modificación de parámetros,Correo, Activación y desactivación de movimiento,Desconexión. Se ordenarán por fecha de manera descendente.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Qué podemos encontrar en la ventana de ajustes?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help blue"></i><strong>¿Qué podemos encontrar en la ventana de ajustes?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes podemos ver información de varios tipos, un apartado de información personal del usuario. Otro apartado para cambiar la resolución de la foto o el streaming/vídeo y otro apartado de ajustes avanzados.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Cómo puedo realizar el cambio de contraseña?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help red"></i><strong>¿Cómo puedo realizar el cambio de contraseña?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes encontraremos un apartado para realizar el cambio de contraseña, pulsamos sobre el botón y rellenamos el formulario, que te pide la contraseña antigua y la nueva que desea poner. Una vez rellenado para ejecutar el cambio pulsamos en el botón de confirmar.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Es lo mismo la resolución de foto que la de vídeo?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help lime"></i><strong>¿Es lo mismo la resolución de foto que la de vídeo?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes podemos ver que hay dos resoluciones distintas, eso es porque la resolución de la foto significa la resolución que tendrá la imagen al ser descargada.
 					      La resolución de Streaming/vídeo significa la resolución aparte la que tendra al ser descargado también es la que tendrá el streaming en vivo.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Se pueden borrar todas las fotos, los vídeos o el historial completo?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help blue"></i><strong>¿Se pueden borrar todas las fotos, los vídeos o el historial completo?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p> Si, si usted desea eliminar uno de éstas tres opciones solo tiene que ir a la ventana de ajustes en el apartado de avanzados en la que encontrará las tres posibilidades, según la que realice tendrá una confirmación previa.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Qué hacer en caso de bloqueo del sistema?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help red"></i><strong>¿Qué hacer en caso de bloqueo del sistema?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p> Si a usted se le bloquea el sistema o el streaming vaya a la ventana de ajustes y tendrá dos opciones: <br>
 					       Reiniciar: el sistema se reiniciará y volvera a encenderse y todo volverá al cabo de 1 ó 2 minutos.<br>
 					       Apagar: el sistema se apagará y para poder volver a encenderlo necesita realizarlo fisicamente, quitando el cable y volviendolo a conectar.
@@ -187,5 +203,7 @@
 				</div>
 			</div>
   		</div><!--container-->
+
+  		<?php } ?>
     </body>
   </html>

@@ -1,5 +1,7 @@
 <?php
 
+ini_set("session.cookie_lifetime","7200");
+ini_set("session.gc_maxlifetime","7200");
 session_start();
 include("../conexion.php");
 
@@ -18,6 +20,8 @@ if(isset($_POST['boton-inicio-confirmar']) || isset($_POST['boton-inicio-confirm
 	if($passwordCifrada==$registro['password']){
 		
 		$_SESSION['id-usuario-logueado']=$registro['id_usuario'];
+
+		$_SESSION['mostrarPagina']=1;
 		
 		$file = fopen("../txt/idUsuario.txt", "w+");
 		fwrite($file, $_SESSION['id-usuario-logueado']);

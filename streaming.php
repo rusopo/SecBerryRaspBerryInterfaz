@@ -1,4 +1,7 @@
 <?php
+	
+	ini_set("session.cookie_lifetime","7200");
+	ini_set("session.gc_maxlifetime","7200");
 	session_start(); 
 	include("conexion.php");
 
@@ -112,6 +115,8 @@
 
 					$(this).addClass("disabled");
 					$(this).addClass("desactivar-button");
+					$(".boton-iniciar-video").addClass("disabled");
+					$(".boton-iniciar-video").addClass("desactivar-button");
 					
 					$.get( "controlador/hacerFoto.php", function( data ){});
 					
@@ -121,11 +126,15 @@
 
 							$(".boton-foto").removeClass("disabled");
 							$(".boton-foto").removeClass("desactivar-button");
+							$(".boton-iniciar-video").removeClass("disabled");
+							$(".boton-iniciar-video").removeClass("desactivar-button");
 							$(".texto-estado").text("Detección de movimiento activado");										
 						}
 						else{
 							$(".boton-foto").removeClass("disabled");
-							$(".boton-foto").removeClass("desactivar-button");					
+							$(".boton-foto").removeClass("desactivar-button");
+							$(".boton-iniciar-video").removeClass("disabled");
+							$(".boton-iniciar-video").removeClass("desactivar-button");					
 							$(".texto-estado").text("Streaming");
 						}
 					  }, 2000);
@@ -140,6 +149,9 @@
 					$.get( "controlador/iniciarVideo.php", function( data ){});
 					
 					$(".texto-estado").text("Grabando vídeo...");
+
+					$(".boton-foto").addClass("disabled");
+					$(".boton-foto").addClass("desactivar-button");
 				});
 				
 				$(".boton-parar-video").click(function(){				
@@ -147,6 +159,9 @@
 					$(".boton-iniciar-video").css({ display: "block"});
 					
 					$.get( "controlador/pararVideo.php", function( data ){});
+
+					$(".boton-foto").removeClass("disabled");
+					$(".boton-foto").removeClass("desactivar-button");
 					
 					if($(".boton-activar-mov").hasClass('disabled')){
 					
@@ -163,10 +178,23 @@
 	</script>
 	
     </head>
-    <body onload="setTimeout('init();',100);" class="cuerpo-index blue">
+    <body onload="setTimeout('init();',100);" class="cuerpo-index blue ">
+
+    	<?php
+    	error_reporting(0);
+    	if($_SESSION['mostrarPagina'] != 1){ ?>
+
+    	<div class="row">
+    		<div class="col l12 s12 m12" align="center">
+    			<h5 style="color:white"><strong>Para poder visualizar la página necesita estar registrado.</strong></h5>
+    		</div>
+    	</div>
+    	<?php } 
+
+    	else{ ?>
 				 
 		 <nav>
-		    <div class="nav-wrapper blue lighten-1 scrollspy">
+		    <div class="nav-wrapper pink lighten-1 scrollspy">
 		      
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
@@ -183,14 +211,14 @@
 			  </ul>
 		      <ul class="right hide-on-med-and-down">
 			  
-			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
-				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galería</a></li>	
-		        <li><a href="historial.php"><i class="mdi-action-assignment"></i> Historial</a></li>
-		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
-		        <li><a href="ayuda.php"><i class="mdi-action-help"></i> Ayuda</a></li>
-		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
+			    <li class="active"><a href="streaming.php"><i class="mdi-action-visibility li-nav-mio"></i> <strong>Streaming </strong></a></li>
+				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper li-nav-mio"></i><strong> Galería</strong></a></li>	
+		        <li><a href="historial.php"><i class="mdi-action-assignment li-nav-mio"></i><strong> Historial</strong></a></li>
+		        <li><a href="ajustes.php"><i class="small mdi-action-settings li-nav-mio"></i><strong> Ajustes</strong></a></li>
+		        <li><a href="ayuda.php"><i class="mdi-action-help li-nav-mio"></i><strong> Ayuda</strong></a></li>
+		        <li style="padding-right:12px"><a href="controlador/logout.php"><i class="mdi-action-exit-to-app li-nav-mio"></i><strong> Salir</strong></a></li>
 		      </ul>
-		      <ul class="side-nav " id="mobile-demo" >
+		      <ul class="side-nav" id="mobile-demo" >
 		        <li id="Perfil" style="display:inline-block">
 		        <div>
 					<?php $query1 = "SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
@@ -205,12 +233,12 @@
 			        </div>
 			    </div>
 		        </li>
-				<li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
-				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galería</a></li>
-		        <li id="Registro"><i class="mdi-action-assignment"></i><a href="historial.php">Historial</a></li>
-		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
-		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="ayuda.php">Ayuda</a></li>
-		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
+				<li class="active" id="Streaming"><a href="streaming.php"><i class="mdi-action-visibility left"></i><strong>Streaming</strong></a></li>
+				<li id="Galeria"><a href="galeria.php"><i class="mdi-device-now-wallpaper left"></i><strong>Galería</strong></a></li>
+		        <li id="Registro"><a href="historial.php"><i class="mdi-action-assignment left"></i><strong>Historial</strong></a></li>
+		        <li id="Ajustes"><a href="ajustes.php"><i class="small mdi-action-settings left"></i><strong>Ajustes</strong></a></li>
+		        <li id="Ayuda"><a href="ayuda.php"><i class="mdi-action-help left"></i><strong>Ayuda</strong></a></li>
+		        <li id="Salir"><a href="controlador/logout.php"><i class="mdi-action-exit-to-app left"></i><strong>Salir</strong></a></li>
 		      </ul>
 		    </div>
 		  </nav>
@@ -446,5 +474,7 @@
 				
 			</div>
 	    </div><!--container-->
+
+	<?php } ?>
     </body>
   </html>

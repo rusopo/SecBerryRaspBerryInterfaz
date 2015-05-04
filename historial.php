@@ -1,14 +1,9 @@
-<?php
+<?php 
+
+	ini_set("session.cookie_lifetime","7200");
+    ini_set("session.gc_maxlifetime","7200");
 	session_start(); 
 	include("conexion.php");
-
-
-function nombremes($mes){
- 
- setlocale(LC_ALL,"spanish");
- $nombre=strftime("%B",mktime(0, 0, 0, $mes, 1, 2000)); 
- return $nombre;
-}
 
 ?>
 
@@ -64,8 +59,21 @@ function nombremes($mes){
     </head>
     <body class="blue">
 
+    	<?php
+    	error_reporting(0);
+    	if($_SESSION['mostrarPagina'] != 1){ ?>
+
+    	<div class="row">
+    		<div class="col l12 s12 m12" align="center">
+    			<h5 style="color:white"><strong>Para poder visualizar la página necesita estar registrado.</strong></h5>
+    		</div>
+    	</div>
+    	<?php } 
+
+    	else{ ?>
+
 		 <nav>
-		    <div class="nav-wrapper  blue lighten-1 ">
+		    <div class="nav-wrapper  pink lighten-1">
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
 			  <ul class="left">
@@ -81,14 +89,14 @@ function nombremes($mes){
 			  </ul>
 		      <ul class="right hide-on-med-and-down">
 			  
-			    <li><a href="streaming.php"><i class="mdi-action-visibility"></i> Streaming</a></li>
-				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper"></i> Galería</a></li>	
-		        <li><a href="historial.php"><i class="mdi-action-assignment"></i> Historial</a></li>
-		        <li><a href="ajustes.php"><i class="small mdi-action-settings"></i> Ajustes</a></li>
-		        <li><a href="ayuda.php"><i class="mdi-action-help"></i> Ayuda</a></li>
-		        <li><a href="controlador/logout.php"><i class="mdi-action-exit-to-app"></i> Salir</a></li>
+			    <li><a href="streaming.php"><i class="mdi-action-visibility li-nav-mio"></i> <strong>Streaming </strong></a></li>
+				<li><a href="galeria.php"><i class="mdi-device-now-wallpaper li-nav-mio"></i><strong> Galería</strong></a></li>	
+		        <li class="active"><a href="historial.php"><i class="mdi-action-assignment li-nav-mio"></i><strong> Historial</strong></a></li>
+		        <li><a href="ajustes.php"><i class="small mdi-action-settings li-nav-mio"></i><strong> Ajustes</strong></a></li>
+		        <li><a href="ayuda.php"><i class="mdi-action-help li-nav-mio"></i><strong> Ayuda</strong></a></li>
+		        <li style="padding-right:12px"><a href="controlador/logout.php"><i class="mdi-action-exit-to-app li-nav-mio"></i><strong> Salir</strong></a></li>
 		      </ul>
-		      <ul class="side-nav" id="mobile-demo" >
+		      <ul class="side-nav " id="mobile-demo" >
 		        <li id="Perfil" style="display:inline-block">
 		        <div>
 					<?php $query1 = "SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
@@ -103,12 +111,12 @@ function nombremes($mes){
 			        </div>
 			    </div>
 		        </li>
-		        <li id="Streaming"><i class="mdi-action-visibility"></i><a href="streaming.php">Streaming</a></li>
-				<li id="Galeria"><i class="mdi-device-now-wallpaper"></i><a href="galeria.php">Galería</a></li>
-		        <li id="Registro"><i class="mdi-action-assignment"></i><a href="historial.php">Historial</a></li>
-		        <li id="Ajustes"><i class="small mdi-action-settings"></i><a href="ajustes.php">Ajustes</a></li>
-		        <li id="Ayuda"><i class="mdi-action-help"></i><a href="ayuda.php">Ayuda</a></li>
-		        <li id="Salir"><i class="mdi-action-exit-to-app"></i><a href="controlador/logout.php">Salir</a></li>
+				<li id="Streaming"><a href="streaming.php"><i class="mdi-action-visibility left"></i><strong>Streaming</strong></a></li>
+				<li id="Galeria"><a href="galeria.php"><i class="mdi-device-now-wallpaper left"></i><strong>Galería</strong></a></li>
+		        <li class="active" id="Registro"><a href="historial.php"><i class="mdi-action-assignment left"></i><strong>Historial</strong></a></li>
+		        <li id="Ajustes"><a href="ajustes.php"><i class="small mdi-action-settings left"></i><strong>Ajustes</strong></a></li>
+		        <li id="Ayuda"><a href="ayuda.php"><i class="mdi-action-help left"></i><strong>Ayuda</strong></a></li>
+		        <li id="Salir"><a href="controlador/logout.php"><i class="mdi-action-exit-to-app left"></i><strong>Salir</strong></a></li>
 		      </ul>
 		    </div>
 		  </nav>
@@ -134,9 +142,24 @@ function nombremes($mes){
 										
 							while($cont_fila = $resultado->fetch_assoc()) {						
 								$num_reg_dia=$cont_fila['fecha_col'];
+
+								$mes=date("F",strtotime($cont_fila['fecha_col']));
+
+								if ($mes=="January") $mes="Enero";
+								if ($mes=="February") $mes="Febrero";
+								if ($mes=="March") $mes="Marzo";
+								if ($mes=="April") $mes="Abril";
+								if ($mes=="May") $mes="Mayo";
+								if ($mes=="June") $mes="Junio";
+								if ($mes=="July") $mes="Julio";
+								if ($mes=="August") $mes="Agosto";
+								if ($mes=="September") $mes="Septiembre";
+								if ($mes=="October") $mes="Octubre";
+								if ($mes=="November") $mes="Noviembre";
+								if ($mes=="December") $mes="Diciembre";
 							?>
 							<li class="collection-header white-text" style="text-align:center"  style="text-align:center"><h4><strong>
-							<?php echo date("j ",strtotime($cont_fila['fecha_col'])) .nombremes(date("m",strtotime($cont_fila['fecha_col']))).' de '
+							<?php echo date("j ",strtotime($cont_fila['fecha_col'])) .$mes.' de '
 							.date("Y",strtotime($cont_fila['fecha_col']));?>
 							</strong></h4></li>
 							<?php
@@ -186,5 +209,7 @@ function nombremes($mes){
 				</div>
 			</div>
   		</div><!--container-->
+
+  		<?php } ?>
     </body>
   </html>
