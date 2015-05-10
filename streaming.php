@@ -193,8 +193,8 @@
 
     	else{ ?>
 				 
-		<div class="navbar-fixed">
 		 <nav>
+
 		    <div class="nav-wrapper blue lighten-2 scrollspy">
 		      
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -219,6 +219,7 @@
 		        <li><a href="ayuda.php"><i class="mdi-action-help li-nav-mio"></i><strong> Ayuda</strong></a></li>
 		        <li style="padding-right:12px"><a href="controlador/logout.php"><i class="mdi-action-exit-to-app li-nav-mio"></i><strong> Salir</strong></a></li>
 		      </ul>
+		      
 		      <ul class="side-nav" id="mobile-demo" >
 		        <li id="Perfil" style="display:inline-block">
 		        <div>
@@ -243,7 +244,7 @@
 		      </ul>
 		    </div>
 		  </nav>
-		</div>
+		
 
 		  <div><!--container-->
 			<div class="row" id="no-resp">

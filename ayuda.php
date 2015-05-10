@@ -74,8 +74,6 @@
 
     	else{ ?>
 
-    	<div class="navbar-fixed">
-
 		 <nav>
 		    <div class="nav-wrapper  blue lighten-2">
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -124,7 +122,6 @@
 		      </ul>
 		    </div>
 		  </nav>
-		</div>
 			
 		<div><!--container-->
 			<div class="row">
