@@ -175,7 +175,7 @@ box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
 #mobile-demo{
 	/**background:#6A1B9A;**/
 
-	background:#ec407a;
+	background:#64b5f6 ;
 	  line-height: 50px;
 	overflow-y:auto;
 
@@ -183,51 +183,51 @@ box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
 #Perfil{
 	/**background:rgba(66, 165, 245, 0.77);**/
 
-	background:#ec407a;
+	background:#64b5f6 ;
 }
 #Fotos{
 	/**background:#69C4DA;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 }
 #Galeria{
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 
 }
 #Videos{
 	/**background:#8787A6;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 }
 #Streaming{
 	/**background:#7C73CD;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 }
 #Registro{
 	/**background:#E8BD6F;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 }
 #Estado{
 	/**background:#AACD7D;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 }
 #Ajustes{
 	/**background:#6FC4AF;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 }
 #Ayuda{
 	/**background:#FF8B8B;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 }
 #Salir{
 	/**background:#EFA58A;**/
-	background:#ec407a;
+	background:#64b5f6 ;
 	padding-left:30%;
 
 }
@@ -235,11 +235,11 @@ box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
 	color:white;
 }
 #mobile-demo li:hover{
-	background:#e91e63;
+	background:#2196f3 ;
 }
 
 #mobile-demo li.active{
-	background:#d81b60;
+	background:#1e88e5  ;
 }
 
 #mobile-demo li{

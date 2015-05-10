@@ -72,8 +72,9 @@
 
     	else{ ?>
 
+		<div class="navbar-fixed">
 		 <nav>
-		    <div class="nav-wrapper  pink lighten-1">
+		    <div class="nav-wrapper  blue lighten-2">
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
 			  <ul class="left">
@@ -120,7 +121,7 @@
 		      </ul>
 		    </div>
 		  </nav>
-
+		</div>
 			<?php
 				$query_fecha_numCada="SELECT DATE_FORMAT(fecha, '%Y-%m-%d')AS fecha_col,COUNT(*) num_reg FROM historial WHERE id_usuario='".$_SESSION['id-usuario-logueado']."' GROUP BY DATE_FORMAT(fecha, '%Y-%m-%d') DESC";
 				$resultado=$mysqli->query($query_fecha_numCada); 

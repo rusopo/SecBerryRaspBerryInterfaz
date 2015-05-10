@@ -193,8 +193,9 @@
 
     	else{ ?>
 				 
+		<div class="navbar-fixed">
 		 <nav>
-		    <div class="nav-wrapper pink lighten-1 scrollspy">
+		    <div class="nav-wrapper blue lighten-2 scrollspy">
 		      
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
@@ -242,6 +243,7 @@
 		      </ul>
 		    </div>
 		  </nav>
+		</div>
 
 		  <div><!--container-->
 			<div class="row" id="no-resp">
@@ -307,7 +309,7 @@
 					<div class="col s12 m12 l12" style="margin-top:1%" align="center">
 						<?php if($registro['motion_detection']==0){ ?>
 							<div class="col s6 m6 l6" align="center">
-								<a class="boton-foto lighten-1 waves-effect waves-light btn btn-large cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+								<a class="boton-foto waves-effect waves-light btn btn-large " style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
 							</div>
 							<div class="col s6 m6 l6" align="center">
 								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
@@ -316,7 +318,7 @@
 						<?php }
 						else if($registro['motion_detection']==1){ ?>
 							<div class="col s6 m6 l6" align="center">
-								<a class="boton-foto lighten-1 waves-effect waves-light btn btn-large cyan lighten-1 desactivar-button disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+								<a class="boton-foto waves-effect waves-light btn btn-large desactivar-button disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
 							</div>
 							<div class="col s6 m6 l6" align="center">
 								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn btn-large red lighten-1 desactivar-button disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
@@ -401,7 +403,7 @@
 					<div class="col s12 m12 l12" style="margin-top:2%" align="center">
 						<?php if($register['motion_detection']==0){ ?>
 							<div class="col s6 m6 l6" align="center">
-								<a class="boton-foto lighten-1 waves-effect waves-light btn cyan lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+								<a class="boton-foto waves-effect waves-light btn" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
 							</div>
 							<div class="col s6 m6 l6" align="center">
 								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn red lighten-1" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>
@@ -410,7 +412,7 @@
 						<?php }
 						else if($register['motion_detection']==1){ ?>
 							<div class="col s6 m6 l6" align="center">
-								<a class="boton-foto lighten-1 waves-effect waves-light btn cyan lighten-1 boton-desactivar-mov disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
+								<a class="boton-foto waves-effect waves-light btn boton-desactivar-mov disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-image-camera-alt"></i></a>
 							</div>
 							<div class="col s6 m6 l6" align="center">
 								<a class="boton-iniciar-video lighten-1 waves-effect waves-light btn red lighten-1 boton-desactivar-mov disabled" style="width:100%;text-align:center;margin-bottom:0px"><i class="mdi-av-videocam"></i></a>

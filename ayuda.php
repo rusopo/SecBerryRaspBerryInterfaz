@@ -74,8 +74,10 @@
 
     	else{ ?>
 
+    	<div class="navbar-fixed">
+
 		 <nav>
-		    <div class="nav-wrapper  pink lighten-1 ">
+		    <div class="nav-wrapper  blue lighten-2">
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
 			  <ul class="left">
@@ -122,7 +124,7 @@
 		      </ul>
 		    </div>
 		  </nav>
-
+		</div>
 			
 		<div><!--container-->
 			<div class="row">
@@ -135,66 +137,66 @@
 					</ul>
 					<ul class="collapsible" data-collapsible="accordion">
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help orange"></i><strong>¿Cómo se realiza una foto o un vídeo?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>Para poder realizar una foto: Ventana Streaming -> pulsamos sobre el botón con el símbolo de una cámara.<br>
-					      	Para realizar un vídeo se sigue los mismos pasos pero pulsamos el botón de una cámara de vídeo, en ese momento se comienza a grabar y para pararlo pulsamos el nuevo botón de STOP que aparece.
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Cómo se realiza una foto o un vídeo?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>Dentro de la ventana "Streaming", para obtener una foto, hay que pulsar sobre el botón con el símbolo de una cámara.<br>
+					      	Para comenzar la grabación de un vídeo, hay que pulsar el botón de la cámara de vídeo. En ese momento se comienza a grabar. Para pararlo, pulsamos el nuevo botón de STOP que aparece en la misma posición.
 					      </p>
 					      </div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help lime"></i><strong>¿Qué pasa cuando activamos la detección de movimiento?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>Una vez activado en la ventana Streaming la detección de movimiento, entra en funcionamiento el módulo de Motion cuyo objetivo es en el momento que se detecta un movimiento se envía un correo al usuario indicando que se ha producido un movimiento, en ese instante se realiza una foto y un vídeo de unos 10 segundos.</p></div>
+					      <div class="collapsible-header cabecera-li-ayuda" style="background-color:#eeeeee"><i class="mdi-action-help"></i><strong>¿Qué ocurre cuando activamos la detección de movimiento?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>Una vez activada la detección de movimiento en la ventana "Streaming", entra en funcionamiento el módulo de Motion, cuyo objetivo es que, en el momento en el que se detecta movimiento, se envía un correo al usuario. En ese instante se realiza una foto y un vídeo de unos 10 segundos.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help red"></i><strong>¿Se puede realizar una foto o un vídeo con la detección de movimiento activada?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>No, no es posible realizar una foto o un vídeo en el momento que la detección de movimiento se encuentra activada. Como se puede observar los botones correspondientes se encuentran desactivados.</p></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Se puede realizar una foto o un vídeo con la detección de movimiento activada?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>No, no es posible realizar una foto o un vídeo cuando la detección de movimiento se encuentra activada. Como se puede observar, los botones correspondientes se encuentran desactivados.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help purple"></i><strong>¿Cómo funciona el cambio de parámetros?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>Si usted desea cambiar los parámetros disponibles como el brillo,contraste o la rotación del streaming lo puede hacer desde la ventana de streaming. Los cambios se pueden realizar todos a la vez o solo el que desee modificar, una vez escogido el nuevo parámetro tiene que pulsar en modificar para que se realicen los cambios pertinentes.</p></div>
+					      <div class="collapsible-header cabecera-li-ayuda" style="background-color:#eeeeee"><i class="mdi-action-help"></i><strong>¿Cómo funciona el cambio de parámetros?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>Si usted desea cambiar los parámetros de imágen disponible, como el brillo,contraste o la rotación, lo puede hacer desde la ventana "Streaming". Los cambios se pueden realizar todos a la vez o sólo el que desee modificar. Una vez escogido el/los nuevo/s parámetro/s, tiene que pulsar en modificar para que se realicen los cambios pertinentes.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help orange"></i><strong>¿Cómo funciona la galería?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>En la galería usted podrá visualizar por separado los vídeos y las imágenes. Como se puede observar en cada una por separado tiene tres opciones que poder realizar: descargar, eliminar y compartir.</p></div>
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Cómo funciona la galería?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>En la galería usted podrá visualizar por separado los vídeos y las imágenes almacenados en el sistema. Cada imágen o vídeo tiene tres opciones que poder realizar: descargar, eliminar y compartir.</p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help teal"></i><strong>¿Qué opciones puede realizar el usuario con una foto o un vídeo en la galería?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda" style="background-color:#eeeeee"><i class="mdi-action-help"></i><strong>¿Qué opciones puede realizar el usuario con una foto o un vídeo en la galería?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p>En cada foto o vídeo usted puede: <br>
-					      	Descargar: Si pulsa a que sí el archivo se descargará en su dispositivo. <br>
-					      	Eliminar: Si pulsa a que sí eliminará este archivo y no lo podrá recuperar.<br>
-					      	Compartir: Podrá elegir a compartir este archivo en estas redes sociales: Facebook,Twitter, Google+.
+					      	Descargar: Si acepta, el archivo se descargará en su dispositivo. <br>
+					      	Eliminar: Si acepta, eliminará este archivo y no lo podrá recuperar.<br>
+					      	Compartir: Podrá compartir el archivo en estas redes sociales: Facebook,Twitter o Google+.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help orange"></i><strong>¿Para qué sirve el historial?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>En la ventana de historial se recogerán los movimientos de Conexión,Foto,Video,Modificación de parámetros,Correo, Activación y desactivación de movimiento,Desconexión. Se ordenarán por fecha de manera descendente.
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Para qué sirve el historial?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>En la ventana de historial se recogerán los movimientos de Conexión, Foto, Video, Modificación de parámetros, Correo, Activación y desactivación de movimiento y Desconexión. Se ordenarán por fecha de manera descendente.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help blue"></i><strong>¿Qué podemos encontrar en la ventana de ajustes?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes podemos ver información de varios tipos, un apartado de información personal del usuario. Otro apartado para cambiar la resolución de la foto o el streaming/vídeo y otro apartado de ajustes avanzados.
+					      <div class="collapsible-header cabecera-li-ayuda" style="background-color:#eeeeee"><i class="mdi-action-help"></i><strong>¿Qué podemos encontrar en la ventana de ajustes?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes podemos ver información de varios tipos: Un apartado de información personal del usuario, otro apartado para cambiar la resolución de la foto o el streaming/vídeo y otro apartado de ajustes avanzados.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help red"></i><strong>¿Cómo puedo realizar el cambio de contraseña?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes encontraremos un apartado para realizar el cambio de contraseña, pulsamos sobre el botón y rellenamos el formulario, que te pide la contraseña antigua y la nueva que desea poner. Una vez rellenado para ejecutar el cambio pulsamos en el botón de confirmar.
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Cómo puedo realizar el cambio de contraseña?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes encontraremos un apartado para realizar el cambio de contraseña. Hay que pulsar sobre el botón y rellenar el formulario, que te pide la contraseña antigua y la nueva que desea poner. Una vez rellenado, para ejecutar el cambio hay que pulsar en el botón de confirmar.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help lime"></i><strong>¿Es lo mismo la resolución de foto que la de vídeo?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes podemos ver que hay dos resoluciones distintas, eso es porque la resolución de la foto significa la resolución que tendrá la imagen al ser descargada.
-					      La resolución de Streaming/vídeo significa la resolución aparte la que tendra al ser descargado también es la que tendrá el streaming en vivo.
+					      <div class="collapsible-header cabecera-li-ayuda" style="background-color:#eeeeee"><i class="mdi-action-help"></i><strong>¿Es lo mismo la resolución de foto que la de vídeo?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p>En ajustes podemos ver que hay dos resoluciones distintas. La resolución de la foto afecta a la calidad de la imagen al ser descargada.
+					      La resolución de Streaming/vídeo afecta a la calidad, tanto del streaming, como del vídeo almacenado al ser descargado.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help blue"></i><strong>¿Se pueden borrar todas las fotos, los vídeos o el historial completo?</strong></div>
-					      <div class="collapsible-body cuerpo-li-ayuda"><p> Si, si usted desea eliminar uno de éstas tres opciones solo tiene que ir a la ventana de ajustes en el apartado de avanzados en la que encontrará las tres posibilidades, según la que realice tendrá una confirmación previa.
+					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help"></i><strong>¿Se pueden borrar todas las fotos, los vídeos o el historial completo?</strong></div>
+					      <div class="collapsible-body cuerpo-li-ayuda"><p> Si. Para elminar por completo una de éstas tres opciones, sólo tiene que ir a la ventana de ajustes. En el apartado "Avanzados" encontrará las tres posibilidades.
 					      </p></div>
 					    </li>
 					    <li>
-					      <div class="collapsible-header cabecera-li-ayuda"><i class="mdi-action-help red"></i><strong>¿Qué hacer en caso de bloqueo del sistema?</strong></div>
+					      <div class="collapsible-header cabecera-li-ayuda" style="background-color:#eeeeee"><i class="mdi-action-help"></i><strong>¿Qué hacer en caso de bloqueo del sistema?</strong></div>
 					      <div class="collapsible-body cuerpo-li-ayuda"><p> Si a usted se le bloquea el sistema o el streaming vaya a la ventana de ajustes y tendrá dos opciones: <br>
-					       Reiniciar: el sistema se reiniciará y volvera a encenderse y todo volverá al cabo de 1 ó 2 minutos.<br>
+					       Reiniciar: el sistema se reiniciará y volvera a encenderse y todo volverá a la normalidad al cabo de 1 ó 2 minutos.<br>
 					       Apagar: el sistema se apagará y para poder volver a encenderlo necesita realizarlo fisicamente, quitando el cable y volviendolo a conectar.
 					      </p></div>
 					    </li>

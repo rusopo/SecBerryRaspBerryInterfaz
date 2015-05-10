@@ -134,8 +134,9 @@
 
     	else{ ?>
 
+		<div class="navbar-fixed">
 		 <nav>
-		    <div class="nav-wrapper  pink lighten-1">
+		    <div class="nav-wrapper  blue lighten-2">
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  <ul class="left">
 				<li class="li-especial"><a href="streaming.php"><img src="images/Secberry_logo.png" alt="" height="58px" width="90px" ></a></li>
@@ -181,6 +182,7 @@
 		      </ul>
 		    </div>
 		</nav>
+	</div>
 				
 			<div class="row divNoResponsivo" id="no-resp">
 						
