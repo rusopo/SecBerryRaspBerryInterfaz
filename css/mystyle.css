@@ -5,6 +5,27 @@ html,body{
 
 }
 
+@media (min-width: 1000px) {
+
+	.logo-principal{
+
+		height: 65px;
+		width: 100px;
+	}
+
+
+}
+
+@media (max-width: 999px) {
+
+	.logo-principal{
+
+		height: 58px;
+		width: 90px;
+	}
+
+}
+
 .divNoResponsivo{
 
 	height:100% !important;
@@ -527,3 +548,5 @@ i.li-nav-mio{
 
 	margin-right: 8px ! important;
 }
+
+

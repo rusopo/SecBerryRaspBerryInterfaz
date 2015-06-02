@@ -16,6 +16,8 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="css/mystyle.css"/>
+
+      <link href='images/Secberry_logo_solo.ico' rel='shortcut icon' type='image/x-icon'>
 	  
       <meta charset="utf-8">
       <!--Let browser know website is optimized for mobile-->

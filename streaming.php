@@ -16,6 +16,8 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="css/mystyle.css"/>
+
+      <link href='images/Secberry_logo_solo.ico' rel='shortcut icon' type='image/x-icon'>
 	  
       <meta charset="utf-8">
       <!--Let browser know website is optimized for mobile-->
@@ -200,15 +202,15 @@
 		      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			  
 			  <ul class="left">
-				<li class="li-especial"><a href="streaming.php"><img src="images/Secberry_logo.png" alt="" height="58px" width="90px" ></a></li>
+				<li class="li-especial"><a href="streaming.php"><img src="images/Secberry_logo.png" class="logo-principal" alt="SecBerry" ></a></li>
 			  </ul>
 			  <ul class="left hide-on-med-and-down">
 				<?php $consul = "SELECT * FROM usuario WHERE id_usuario='".$_SESSION['id-usuario-logueado']."'"; 
 							$res = $mysqli->query($consul);
 							$reg = $res->fetch_assoc(); ?>
 							
-				<li class="li-especial li-especial-text"><i class="mdi-social-person"></i> <?php echo $reg['nombre']?></a></li>
-				<li class="li-especial li-especial-text"><i class="mdi-action-info-outline"></i> <?php echo $reg['clave_producto']?></a></li>
+				<li class="li-especial li-especial-text"><i class="mdi-social-person left"></i> <?php echo $reg['nombre']." ".$reg['apellidos']?></a></li>
+				<li class="li-especial li-especial-text"><i class="mdi-device-wifi-tethering left"></i> <?php echo $reg['ip_publica']?></a></li>
 			  </ul>
 		      <ul class="right hide-on-med-and-down">
 			  
@@ -230,8 +232,8 @@
 			        	<img class="circle" style="margin-top:7%" src="fotosPerfil/<?php echo $fila['foto'] ?>" alt="" width="40%" height="40%">
 			        </div>
 			        <div style="line-height:20px;margin-bottom:22px;text-align:center">			  						
-							<p>Nombre: <?php echo $fila['nombre']?></p>
-							<p>ID: <?php echo $fila['clave_producto']?></p>
+							<p><strong>Nombre:</strong> <?php echo $fila['nombre']." ".$reg['apellidos']?></p>
+							<p><strong>IP:</strong> <?php echo $fila['ip_publica']?></p>
 			        </div>
 			    </div>
 		        </li>
