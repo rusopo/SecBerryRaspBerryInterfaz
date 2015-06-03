@@ -204,20 +204,37 @@
 						<div id="galeria-general-imagenes">
 
 							<?php
-								$fotos = scandir("media/images/");
+
+								setlocale(LC_ALL, "esp");
+								$directorio='media/images'; 
+								$fotos = scandir($directorio);
+								$arrlength=count($fotos); 
+
 								if(count($fotos) == 2) echo "<h5 class='white-text'>No tienes imágenes.</h5>";
-								else {
-									$contModalIm=0;
-									foreach($fotos as $foto) {
-										if(($foto != '.') && ($foto != '..')) {
-											$fsz = round ((filesize("media/images/" . $foto)) / (1024 * 1024));			
+								else {													 								        
+								    for($x=0;$x<$arrlength;$x++){ 
+								        $nombre_archivo = $fotos[$x];
+								        if(($nombre_archivo != '.') && ($nombre_archivo != '..')){
+									        $fecha = strftime("%d de %B de %Y", filemtime("$directorio/$nombre_archivo")); 
+									        $todo[filemtime("$directorio/$nombre_archivo")]=array($directorio,$fotos[$x],$fecha);
+									    } 
+							        } 
+							    } 								 
+								krsort($todo); //Ordenar array
+
+								$contModalIm=0;
+								for($i=0; $i<count($todo); $i++){ 
+								    $actual=current($todo);
+								    $nombre_foto=$actual[1];
+								    $fsz = round ((filesize("media/images/" . $nombre_foto)) / (1024 * 1024));	
+																	 										
 								?>
 									<div class="col l4 m12 s12 item-general">					
 										<div class="col l12 m12 s12 center gallery-img item-galeria-foto">
-											<div><img class="zoom-imagen responsive-img" onclick="toggle_fullscreen(this);" src="media/preview/<?php echo $foto?>"></div>
+											<div><img class="zoom-imagen responsive-img" onclick="toggle_fullscreen(this);" src="media/preview/<?php echo $nombre_foto?>"></div>
 										</div>
 										<div class="col m12 s12 l12 center item-galeria-texto">
-											<?php echo $foto?>
+											<?php echo $nombre_foto?>
 										</div>
 										<div class="col m12 s12 l12 center item-galeria-botones">
 											<div class="col s4 m4 l4">
@@ -230,7 +247,7 @@
 													  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 													</div>
 													<div class="col l12 m12 s12 blue" style="text-align:right">									
-														  <a href ="controlador/descargaFoto.php?file=<?php echo $foto?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+														  <a href ="controlador/descargaFoto.php?file=<?php echo $nombre_foto?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
 														  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									  									  
 													</div>
 												  </div>						
@@ -245,7 +262,7 @@
 													  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 													</div>
 													<div class="col l12 m12 s12 blue" style="text-align:right">									
-													  <a href="controlador/borrarArchivo.php?delete=<?php echo $foto?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+													  <a href="controlador/borrarArchivo.php?delete=<?php echo $nombre_foto?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
 													  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
 													</div>
 												  </div>
@@ -258,9 +275,9 @@
 													<div class="modal-content">
 														<h4 class="white-text" style="text-align:center">Compartir</h4>
 														<div class="social hidden-xs">
-														  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $foto?>&t=Esta imagen es compartida por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-														  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $foto?>&text=Esta imagen es compartida por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-														  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $foto?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+														  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_foto?>&t=Esta imagen es compartida por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+														  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_foto?>&text=Esta imagen es compartida por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+														  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_foto?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 														</div>
 													</div>
 													<div class="modal-footer blue">
@@ -269,36 +286,52 @@
 												  </div>
 											</div>
 										</div>
-									</div>
+									</div> 
 								
 								<?php 
 									$contModalIm++;
-										}
-									}
+									next($todo);
 								}
+
 								?>					
 						</div>
 						
 						<div id="galeria-general-videos" style="display:none">
 							
 							<?php
-								$videos = scandir("media/videos/");
-								if(count($videos) == 2) echo "<h5 class='white-text'>No tienes vídeos.</h5>";
-								else {
-									$contModalVid=0;
-									foreach($videos as $video) {
-										if(($video != '.') && ($video != '..') && (substr($video, -3) == "mp4")) {
-											$fsz = round ((filesize("media/videos/" . $video)) / (1024 * 1024));			
+
+								setlocale(LC_ALL, "esp");
+								$directorio2='media/videos'; 
+								$videos = scandir($directorio2);
+								$arrlength2=count($videos); 
+
+								if(count($videos) == 2) echo "<h5 class='white-text'>No tienes imágenes.</h5>";
+								else {													 								        
+								    for($a=0;$a<$arrlength2;$a++){ 
+								        $nombre_archivo2 = $videos[$a];
+								        if(($nombre_archivo2 != '.') && ($nombre_archivo2 != '..') && (substr($nombre_archivo2, -3) == "mp4")){
+									        $fecha2 = strftime("%d de %B de %Y", filemtime("$directorio2/$nombre_archivo2")); 
+									        $todo2[filemtime("$directorio2/$nombre_archivo2")]=array($directorio2,$videos[$a],$fecha2);
+									    } 
+							        } 
+							    } 								 
+								krsort($todo2); //Ordenar array
+
+								$contModalVid=0;
+								for($j=0; $j<count($todo2); $j++){ 
+								    $actual2=current($todo2);
+								    $nombre_video=$actual2[1];
+								    $fsz = round ((filesize("media/videos/" . $nombre_video)) / (1024 * 1024));			
 								?>
 								
 								<div class="col l4 m12 s12 item-general">
 									<div class="col l12 m12 s12 center gallery-img item-video">
 										<video width="100%" controls>
-											<source src="media/videos/<?php echo $video ?>" type="video/mp4">
+											<source src="media/videos/<?php echo $nombre_video ?>" type="video/mp4">
 										</video>
 									</div>
 									<div class="col l12 m12 s12 center item-galeria-texto-video">
-										<?php echo $video?>
+										<?php echo $nombre_video?>
 									</div>
 									<div class="col l12 s12 m12 center item-galeria-botones">
 										<div class="col s4 m4 l4">
@@ -311,7 +344,7 @@
 												  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 												</div>
 												<div class="col l12 m12 s12 blue right" style="text-align:right">
-												  <a href ="controlador/descargaVideo.php?file=<?php echo $video?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+												  <a href ="controlador/descargaVideo.php?file=<?php echo $nombre_video?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
 												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
 												</div>
 											  </div>						
@@ -326,7 +359,7 @@
 												  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 												</div>
 												<div class="col l12 m12 s12 blue" style="text-align:right">									
-												  <a href="controlador/borrarArchivo.php?delete=<?php echo $video?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+												  <a href="controlador/borrarArchivo.php?delete=<?php echo $nombre_video?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
 												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
 												</div>
 											  </div>
@@ -339,9 +372,9 @@
 												<div class="modal-content">
 													<h4 class="white-text" style="text-align:center">Compartir</h4>
 													<div class="social hidden-xs">
-													  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $video?>&t=Este video es compartido por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-													  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $video?>&text=Este video es compartido por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-													  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $video?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+													  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_video?>&t=Este video es compartido por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+													  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_video?>&text=Este video es compartido por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+													  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_video?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 													</div>
 												</div>
 												<div class="modal-footer blue">
@@ -354,9 +387,7 @@
 								
 								<?php 
 									$contModalVid++;
-										}
-									
-									}
+									next($todo2);
 								}
 								?>
 						
@@ -379,20 +410,35 @@
 					<div id="galeria-general-imagenes-mov"> 
 					
 						<?php
-								$fotosMov = scandir("media/images/");
+								setlocale(LC_ALL, "esp");
+								$directorio3='media/images'; 
+								$fotosMov = scandir($directorio3);
+								$arrlength3=count($fotosMov); 
+
 								if(count($fotosMov) == 2) echo "<h5 class='white-text'>No tienes imágenes.</h5>";
-								else {
-									$contModalImMov=0;
-									foreach($fotosMov as $fotoMov) {
-										if(($fotoMov != '.') && ($fotoMov != '..')) {
-											$fsz = round ((filesize("media/images/" . $fotoMov)) / (1024 * 1024));			
+								else {													 								        
+								    for($c=0;$c<$arrlength3;$c++){ 
+								        $nombre_archivo3 = $fotosMov[$c];
+								        if(($nombre_archivo3 != '.') && ($nombre_archivo3 != '..')){
+									        $fecha3 = strftime("%d de %B de %Y", filemtime("$directorio3/$nombre_archivo3")); 
+									        $todo3[filemtime("$directorio3/$nombre_archivo3")]=array($directorio3,$fotosMov[$c],$fecha3);
+									    } 
+							        } 
+							    } 								 
+								krsort($todo3); //Ordenar array
+
+								$contModalImMov=0;
+								for($k=0; $k<count($todo3); $k++){ 
+								    $actual3=current($todo3);
+								    $nombre_foto_mov=$actual3[1];
+								    $fsz = round ((filesize("media/images/" . $nombre_foto_mov)) / (1024 * 1024));			
 								?>
 									<div class="col l4 m12 s12 item-general">					
 										<div class="col l12 m12 s12 center gallery-img item-galeria-foto">
-											<div><img class="responsive-img" src="media/preview/<?php echo $fotoMov?>"></div>
+											<div><img class="responsive-img" src="media/preview/<?php echo $nombre_foto_mov?>"></div>
 										</div>
 										<div class="col m12 s12 l12 center item-galeria-texto">
-											<?php echo $fotoMov?>
+											<?php echo $nombre_foto_mov?>
 										</div>
 										<div class="col m12 s12 l12 center item-galeria-botones">
 											<div class="col s4 m4 l4">
@@ -405,7 +451,7 @@
 													  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 													</div>
 													<div class="col l12 m12 s12 blue" style="text-align:right">									
-														  <a href ="controlador/descargaFoto.php?file=<?php echo $fotoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+														  <a href ="controlador/descargaFoto.php?file=<?php echo $nombre_foto_mov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
 														  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									  									  
 													</div>
 												  </div>						
@@ -420,7 +466,7 @@
 													  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 													</div>
 													<div class="col l12 m12 s12 blue" style="text-align:right">									
-													  <a href="controlador/borrarArchivo.php?delete=<?php echo $fotoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+													  <a href="controlador/borrarArchivo.php?delete=<?php echo $nombre_foto_mov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
 													  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
 													</div>
 												  </div>
@@ -433,9 +479,9 @@
 													<div class="modal-content">
 														<h4 class="white-text" style="text-align:center">Compartir</h4>
 														<div class="social hidden-xs">
-														  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $fotoMov?>&t=Esta imagen es compartida por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-														  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $fotoMov?>&text=Esta imagen es compartida por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-														  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $fotoMov?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+														  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_foto_mov?>&t=Esta imagen es compartida por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+														  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_foto_mov?>&text=Esta imagen es compartida por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+														  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_foto_mov?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 														</div>
 													</div>
 													<div class="modal-footer blue">
@@ -448,8 +494,7 @@
 								
 								<?php 
 									$contModalImMov++;
-										}
-									}
+									next($todo3);
 								}
 								?>
 					
@@ -458,23 +503,38 @@
 					<div id="galeria-general-videos-mov" style="display:none"> 
 						
 						<?php
-								$videosMov = scandir("media/videos/");
-								if(count($videosMov) == 2) echo "<h5 class='white-text'>No tienes vídeos.</h5>";
-								else {
-									$contModalVidMov=0;
-									foreach($videosMov as $videoMov) {
-										if(($videoMov != '.') && ($videoMov != '..') && (substr($videoMov, -3) == "mp4")) {
-											$fsz = round ((filesize("media/videos/" . $videoMov)) / (1024 * 1024));			
+								setlocale(LC_ALL, "esp");
+								$directorio4='media/videos'; 
+								$videosMov = scandir($directorio4);
+								$arrlength4=count($videosMov); 
+
+								if(count($videosMov) == 2) echo "<h5 class='white-text'>No tienes imágenes.</h5>";
+								else {													 								        
+								    for($d=0;$d<$arrlength4;$d++){ 
+								        $nombre_archivo4 = $videosMov[$d];
+								        if(($nombre_archivo4 != '.') && ($nombre_archivo4 != '..') && (substr($nombre_archivo4, -3) == "mp4")){
+									        $fecha4 = strftime("%d de %B de %Y", filemtime("$directorio4/$nombre_archivo4")); 
+									        $todo4[filemtime("$directorio4/$nombre_archivo4")]=array($directorio4,$videosMov[$d],$fecha4);
+									    } 
+							        } 
+							    } 								 
+								krsort($todo4); //Ordenar array
+
+								$contModalVidMov=0;
+								for($l=0; $l<count($todo4); $l++){ 
+								    $actual4=current($todo4);
+								    $nombre_video_mov=$actual4[1];
+								    $fsz = round ((filesize("media/videos/" . $nombre_video_mov)) / (1024 * 1024));				
 								?>
 								
 								<div class="col l4 m12 s12 item-general">
 									<div class="col l12 m12 s12 center gallery-img item-video">
 										<video width="100%" controls>
-											<source src="media/videos/<?php echo $videoMov ?>" type="video/mp4">
+											<source src="media/videos/<?php echo $nombre_video_mov ?>" type="video/mp4">
 										</video>
 									</div>
 									<div class="col l12 m12 s12 center item-galeria-texto-video">
-										<?php echo $videoMov?>
+										<?php echo $nombre_video_mov?>
 									</div>
 									<div class="col l12 s12 m12 center item-galeria-botones">
 										<div class="col s4 m4 l4">
@@ -487,7 +547,7 @@
 												  <p>Tamaño del archivo: (<?php echo $fsz?> MB)</p>
 												</div>
 												<div class="col l12 m12 s12 blue right" style="text-align:right">
-												  <a href ="controlador/descargaVideo.php?file=<?php echo $videoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
+												  <a href ="controlador/descargaVideo.php?file=<?php echo $nombre_video_mov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal boton-descarga"><i class="mdi-navigation-check left"></i>Si</a>									
 												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
 												</div>
 											  </div>						
@@ -502,7 +562,7 @@
 												  <p>Una vez lo hagas no podras volver a recuperar el archivo.</p>
 												</div>
 												<div class="col l12 m12 s12 blue" style="text-align:right">									
-												  <a href="controlador/borrarArchivo.php?delete=<?php echo $videoMov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
+												  <a href="controlador/borrarArchivo.php?delete=<?php echo $nombre_video_mov?>" class=" white-text modal-action waves-effect waves-light btn-flat z-depth-4 teal lighten-1 boton-modal" ><i class="mdi-navigation-check left"></i>Si</a>
 												  <a class="white-text modal-action modal-close waves-effect waves-light btn-flat red lighten-1 z-depth-4 boton-modal boton-cerrar-modal"><i class="mdi-navigation-close left"></i>No</a>									
 												</div>
 											  </div>
@@ -515,9 +575,9 @@
 												<div class="modal-content">
 													<h4 class="white-text" style="text-align:center">Compartir</h4>
 													<div class="social hidden-xs">
-													  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $videoMov?>&t=Este video es compartido por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
-													  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $videoMov?>&text=Este video es compartido por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
-													  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $videoMov?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
+													  <a href="http://www.facebook.com/sharer.php?u=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_video_mov?>&t=Este video es compartido por SecBerry." class="link facebook" target="_parent"><span class="fa fa-facebook-square"></span></a>
+													  <a href="http://twitter.com/share?url=http://<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_video_mov?>&text=Este video es compartido por SecBerry." class="link twitter" target="_parent"><span class="fa fa-twitter"></span></a>
+													  <a href="https://plus.google.com/share?url=http%3A%2F%2F<?php echo $fila['ip_publica']?>/SecBerry/media/preview/<?php echo $nombre_video_mov?>" class="link google-plus" target="_parent"><span class="fa fa-google-plus-square"></span></a>
 													</div>
 												</div>
 												<div class="modal-footer blue">
@@ -530,9 +590,7 @@
 								
 								<?php 
 									$contModalVidMov++;
-										}
-									
-									}
+									next($todo4);
 								}
 								?>
 					
